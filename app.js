@@ -12,9 +12,11 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, "public/views"))
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-    res.render('home/index');
-});
+
+const homeRouter = require('./src/routes/homeRoutes');
+
+app.use('/', homeRouter)
+// app.use('/play', playRouter)
 
 app.get("/*", (req, res) => {
 	res.status(404).render("home/404");
