@@ -25,6 +25,15 @@
 
         <main>
             <h1>Online Casino</h1>
+            <% if (locals.loggedIn) { %>
+                <p>Salut, <%= locals.username %> </p>
+            <% } else { %>   
+                <% if (locals.message) { %>
+                    <p style="color:red"><%= locals.message %>    </p>
+                <% } %>
+                <%- include('../partials/login') %>
+                <%- include('../partials/register') %>
+            <%} %>
         </main>
         
         <!-- exemplu includere partial header -->

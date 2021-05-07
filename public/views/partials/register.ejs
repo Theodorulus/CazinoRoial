@@ -1,0 +1,22 @@
+<html>
+  <head>
+	<title>Example Login Form</title>
+  </head>
+  <body>
+	<form action="/accounts/register" method="post">
+    <% if (locals.errorRegister) { %>
+      <p style="color:red"> <%= locals.errorRegister %>    </p>
+  <% } %>
+        Name:<br>
+        <input type="text" name="name" placeholder="Name" required><br><br>
+        
+        Email:<br>
+  	<input type="text" name="email" placeholder="Email" required><br><br>
+      
+  	Password:<br>
+  	<input type="password" name="password" placeholder="Password" required><br><br>
+
+  	<input type="submit" value="register">
+	</form>
+  </body>
+</html>
