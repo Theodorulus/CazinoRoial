@@ -25,12 +25,19 @@
 
         <main>
             <h1>Online Casino</h1>
-            <% if (locals.loggedIn) { %>
-                <p>Salut, <%= locals.username %> </p>
+            
+            <% if (locals.message) { %>
+                <p style="color:rgb(21, 255, 0)"><%= locals.message %>    </p>
+            <% } %>
+
+            <% if (locals.user) { %>
+                <p>Salut, <%= user.username %> </p>
+
+                <form action="/accounts/logout" method="post">
+                    <button type="submit">Logout</button>
+                </form>
             <% } else { %>   
-                <% if (locals.message) { %>
-                    <p style="color:red"><%= locals.message %>    </p>
-                <% } %>
+
                 <%- include('../partials/login') %>
                 <%- include('../partials/register') %>
             <%} %>
