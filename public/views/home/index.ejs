@@ -32,9 +32,9 @@
 
             <% if (locals.user) { %>
                 <p>Salut, <%= user.username %> </p>
-                <button href="/games/slots">Play slots</button>
-                <button href="/games/roulette">Play roullete</button>
-                
+                <a href="/games/slots">Play slots</a>
+                <a href="/games/roulette">Play roullete</a>
+                <p>RoialPointz: <%= user.rp %></p>
                 <form action="/accounts/logout" method="post">
                     <button type="submit">Logout</button>
                 </form>
