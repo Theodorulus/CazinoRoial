@@ -19,6 +19,7 @@ const login = async function(req,res){
     db.query('SELECT * FROM users WHERE email = ?',email, async function (error, results, fields) {
      
 		if (error) {
+			console.log(error)
 			res.status(500);
 			return res.render("home/index",{
 				"code":500,
@@ -51,6 +52,7 @@ const login = async function(req,res){
 				})
 			}
 		} catch (error) {
+			console.log(error)
 			res.status(500);
 			return res.render("home/index",{
 				"code":500,
