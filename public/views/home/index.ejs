@@ -25,6 +25,22 @@
 
         <main>
             <h1>Online Casino</h1>
+            
+            <% if (locals.message) { %>
+                <p style="color:rgb(21, 255, 0)"><%= locals.message %>    </p>
+            <% } %>
+
+            <% if (locals.user) { %>
+                <p>Salut, <%= user.username %> </p>
+
+                <form action="/accounts/logout" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+            <% } else { %>   
+
+                <%- include('../partials/login') %>
+                <%- include('../partials/register') %>
+            <%} %>
         </main>
         
         <!-- exemplu includere partial header -->
