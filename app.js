@@ -32,6 +32,10 @@ app.use('/', getUserDataIfLoggedIn, homeRouter)
 const accountRouter = require('./src/routes/accountsRoutes');
 app.use('/accounts', accountRouter)
 
+//GAMES
+const gameRouter = require('./src/routes/gamesRoutes');
+app.use('/games', gameRouter)
+
 // app.use('/play', playRouter)
 
 app.get("/*", (req, res) => {
