@@ -11,11 +11,20 @@ const session = require('./src/config/sessionConfig')
 
 const io = require('socket.io')(server);
 
+const {gainRP, loseRP} = require('./src/modules/manageRoialPointz')
+const cookie = require('cookie')
 
 io.on('connection', socket => {
-	console.log(socket.id);
-})
+	var raw = cookie.parse(socket.handshake.headers.cookie);
+	var sessionId = raw['connect.sid'].split(":")[1].split('.')[0];
 
+	socket.on('gainRP', RP => {
+		gainRP(sessionId, RP);
+	})
+	socket.on('loseRP', RP => {
+		loseRP(sessionId, RP);
+	})
+})
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, "public/views"));
@@ -40,8 +49,8 @@ const accountRouter = require('./src/routes/accountsRoutes');
 app.use('/accounts', accountRouter)
 
 //GAMES
-const gameRouter = require('./src/routes/gamesRoutes');
-app.use('/games', gameRouter)
+const gamesRouter = require('./src/routes/gamesRoutes')
+app.use('/games', gamesRouter)
 
 // app.use('/play', playRouter)
 
