@@ -9,6 +9,13 @@ const server = new http.createServer(app);
 const path = require('path');
 const session = require('./src/config/sessionConfig')
 
+const io = require('socket.io')(server);
+
+
+io.on('connection', socket => {
+	console.log(socket.id);
+})
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, "public/views"));
