@@ -1,5 +1,3 @@
-
-
 const index = (req, res) => {
     viewBag = {
         user: req.userData
