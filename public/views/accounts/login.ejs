@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Cazino Roial Login Page">
+		<meta name="keywords" content="casino, cazino, roial, royale, poker, ruleta, slots, pacanele, blackjack, login, logare">
+		<meta name="author" content="Hîrhui Călin, Smeu Ștefan, Tică Constantin, Tudorache Theodor, Zaharia Cătălin">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cazino Roial - Logare</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico"/>
+		<link href="../../css/layout.css" rel="stylesheet" type="text/css">
+		<link href="../../css/loginregister.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<%- include('../partials/header') %>
+		<main>
+				<form action="/accounts/login" method="post">
+				<div class="login">
+					<h2>Loghează-te în cont</h2>
+					
+					
+					<input type="text" placeholder="Email" name="email" id="email" required>
+
+					<input type="password" placeholder="Parola" name="pass" id="pass" required>
+					<button type="submit" class="loginbtn">Logare</button>
+					
+				</div>
+			</form>
+		</main>
+		<%- include('../partials/footer') %>
+	  
+	</body>
+</html>

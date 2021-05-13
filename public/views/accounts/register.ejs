@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Cazino Roial Register Page">
+		<meta name="keywords" content="casino, cazino, roial, royale, poker, ruleta, slots, pacanele, blackjack, register, inregistrare">
+		<meta name="author" content="Hîrhui Călin, Smeu Ștefan, Tică Constantin, Tudorache Theodor, Zaharia Cătălin">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cazino Roial - Înregistrare</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico"/>
+		<link href="../../css/layout.css" rel="stylesheet" type="text/css">
+		<link href="../../css/loginregister.css" rel="stylesheet" type="text/css">
+	</head>
+<body>
+	<%- include('../partials/header') %>
+	<main>
+			<form action="/accounts/register" method="post">
+			<div class="register">
+				<h2>Înregistrează-te</h2>
+				<p>Completează formularul de mai jos pentru a crea un cont.</p>
+				<hr>
+				
+				<input type="text" placeholder="Nume Utilizator" name="username" id="username" required>
+				
+				<input type="text" placeholder="Email" name="email" id="email" required>
+
+				<input type="password" placeholder="Parola" name="pass" id="pass" required>
+				
+				<input type="password" placeholder="Confirmă Parola" name="confirm_pass" id="confirm_pass" required>
+
+				<input type="tel" placeholder="Nr. telefon" name="phone" id="phone" required>
+				
+				<input type="date" placeholder="Data nașterii" name="data" id="data_nastere" required>
+				
+				<hr>
+				<p>Apăsând pe "Înregistrare" ești de acord cu <a href="#">Termenii si Conditiile</a> noastre.</p>
+				<button type="submit" class="loginbtn">Înregistrare</button>
+			</div>
+		</form>
+	</main>
+	
+  <%- include('../partials/footer') %>
+  
+  
+<!-- Main Container Ends -->
+</body>
+</html>
