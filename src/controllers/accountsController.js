@@ -72,34 +72,42 @@ const login_post = async function(req,res){
 
 const register_post = async function(req,res){
     const password = req.body.password;
+	const confirm_pass = req.body.confirm_pass;
+	console.log(password, confirm_pass)
+
+	if (password !== confirm_pass){
+		return res.render("accounts/register", {
+			"errorRegister": "Passwords do not match."
+		})
+	}
 
 	try {
 		const salt = bcrypt.genSaltSync(10);
 		const encryptedPassword = await bcrypt.hash(password, salt);
 		var user =[
-			String(req.body.name),
+			String(req.body.username),
 			String(req.body.email),
 			String(encryptedPassword)
 		]
 	
-		db.query('INSERT INTO users(Username,Email, Password) VALUES (?,?,?)',user, function (error, results, fields) {
+		db.query('INSERT INTO users(Username, Email, Password) VALUES (?,?,?)',user, function (error, results, fields) {
 			if (error) {
 				res.status(500);
 				return res.render("accounts/register",{
 					"code":500,
-					"errorLogin":"Internal server error"
+					"errorRegister":"Internal server error"
 				})
 			}
 					
 			// CREARE PROFIL (AUTOMAT)
 			const userId = results.insertId;
-			db.query('INSERT INTO profile(UserId) VALUES(?)', [userId], error => {
+			db.query('INSERT INTO profile(UserId, Phone, Birthdate) VALUES(?, ?, ?)', [userId, req.body.phone, req.body.data], error => {
 				if (error) {
 					console.log(error)
 					res.status(500)
 					return res.render('accounts/register', {
 						"code":500,
-						"errorLogin":"Internal server error"
+						"errorRegister":"Internal server error"
 					})
 				}
 				res.status(200);
@@ -111,7 +119,7 @@ const register_post = async function(req,res){
 		res.status(500);
 		res.render("accounts/register",{
 			"code":500,
-			"errorLogin":"Internal server error"
+			"errorRegister":"Internal server error"
 		})
 	}
 }

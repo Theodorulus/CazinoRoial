@@ -13,10 +13,12 @@ const createProfileTable = `
     CREATE TABLE IF NOT EXISTS profile(
         id INT NOT NULL UNIQUE AUTO_INCREMENT,
         RoialPointz INT NOT NULL DEFAULT 100,
+        Phone VARCHAR(20),
+        Birthdate DATE,
         UserId INT NOT NULL UNIQUE,
         CONSTRAINT profile_id_pk PRIMARY KEY(id),
         CONSTRAINT profile_userid_fk FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
-    )
+    );
 `
 
 function createSchema() {
