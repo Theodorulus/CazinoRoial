@@ -9,8 +9,15 @@
 			<a href="#"><li><i class = "icon"><img src="../../img/cards.png"></i>POKER</li></a>
 			<a href="#"><li><i class = "icon"><img src="../../img/cards.png"></i> BLACKJACK</li></a>
 			<div class = "user">
-				<li><a href="/accounts/login">LOGARE</a></li>
-				<li><a href="/accounts/register">CREAZĂ CONT</a></li>
+				<% if (locals.user) { %>
+					<div>
+						<span>User: <%= user.username %> - RoialPointz: <%= user.rp %></span>
+						<%- include('../partials/logout') %>
+					</div>
+				<% } else { %>
+					<li><a href="/accounts/login">LOGARE</a></li>
+					<li><a href="/accounts/register">CREAZĂ CONT</a></li>
+				<% } %>
 			</div>
 		  </ul>
 	</nav>

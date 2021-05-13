@@ -15,6 +15,10 @@
 <body>
 	<%- include('../partials/header') %>
 	<main>
+			<% if (locals.errorRegister) { %>
+				<p><%= errorRegister %></p>
+			<% } %>
+
 			<form action="/accounts/register" method="post">
 			<div class="register">
 				<h2>Înregistrează-te</h2>
@@ -26,7 +30,7 @@
 				
 				<input type="text" placeholder="Email" name="email" id="email" required>
 
-				<input type="password" placeholder="Parola" name="pass" id="pass" required>
+				<input type="password" placeholder="Parola" name="password" id="pass" required>
 				
 				<input type="password" placeholder="Confirmă Parola" name="confirm_pass" id="confirm_pass" required>
 
