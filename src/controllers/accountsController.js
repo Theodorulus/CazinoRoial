@@ -6,6 +6,14 @@ const bcrypt = require('bcrypt');
 
 // TO DO: de modificat rutele din home/index in accounts/login, accounts/register
 
+const login_get = (req, res) => {
+	res.render('accounts/login');
+}
+
+const register_get = (req, res) => {
+	res.render('accounts/register');
+}
+
 const logout = (req, res) => {
 	if (req.session && req.session.userLoggedIn){
 		req.session.destroy();
@@ -13,7 +21,7 @@ const logout = (req, res) => {
 	res.redirect('/')
 }
 
-const login = async function(req,res){
+const login_post = async function(req,res){
     var email= req.body.email;
     var password = req.body.password;
     db.query('SELECT * FROM users WHERE email = ?',email, async function (error, results, fields) {
@@ -21,7 +29,7 @@ const login = async function(req,res){
 		if (error) {
 			console.log(error)
 			res.status(500);
-			return res.render("home/index",{
+			return res.render("accounts/login",{
 				"code":500,
 				"errorLogin":"Internal server error"
 			})
@@ -29,7 +37,7 @@ const login = async function(req,res){
 
 		if(results.length === 0) {
 			res.status(206);
-			return res.render("home/index",{
+			return res.render("accounts/login",{
 				"code":206,
 				"errorLogin":"Email does not exits"
 			})
@@ -46,7 +54,7 @@ const login = async function(req,res){
 			}
 			else{
 				res.status(204)
-				return res.render("home/index",{
+				return res.render("accounts/login",{
 					"code":204,
 					"errorLogin": "Email and password does not match"
 				})
@@ -54,7 +62,7 @@ const login = async function(req,res){
 		} catch (error) {
 			console.log(error)
 			res.status(500);
-			return res.render("home/index",{
+			return res.render("accounts/login",{
 				"code":500,
 				"errorLogin":"Internal server error"
 			})
@@ -62,7 +70,7 @@ const login = async function(req,res){
 	});
 }
 
-const register = async function(req,res){
+const register_post = async function(req,res){
     const password = req.body.password;
 
 	try {
@@ -77,21 +85,11 @@ const register = async function(req,res){
 		db.query('INSERT INTO users(Username,Email, Password) VALUES (?,?,?)',user, function (error, results, fields) {
 			if (error) {
 				res.status(500);
-				return res.render("home/index",{
+				return res.render("accounts/register",{
 					"code":500,
 					"errorLogin":"Internal server error"
 				})
 			}
-
-			
-			// de ce mai selectezi tot din users daca nu faci nimic cu datele?
-			// db.query('SELECT * FROM users', function(error,results,fields){
-				//   res.status(200);
-				//   res.render("home/index", {
-					//     "code":200,
-					//     "message":"user registered sucessfully"
-					//       })
-					// })
 					
 			// CREARE PROFIL (AUTOMAT)
 			const userId = results.insertId;
@@ -99,7 +97,7 @@ const register = async function(req,res){
 				if (error) {
 					console.log(error)
 					res.status(500)
-					return res.render('home/index', {
+					return res.render('accounts/register', {
 						"code":500,
 						"errorLogin":"Internal server error"
 					})
@@ -111,7 +109,7 @@ const register = async function(req,res){
 
 	} catch (error) {
 		res.status(500);
-		res.render("home/index",{
+		res.render("accounts/register",{
 			"code":500,
 			"errorLogin":"Internal server error"
 		})
@@ -119,5 +117,5 @@ const register = async function(req,res){
 }
 
 module.exports = {
-    logout, login, register
+    login_get, register_get, logout, login_post, register_post
 }
