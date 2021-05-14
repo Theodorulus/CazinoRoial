@@ -8,6 +8,7 @@ socket.on('connection', () => {
 //     console.log(data)
 // })
 
+/*
 document.querySelector("#btn1").onclick = () => {
     var input = 5;
     gainRP(input);
@@ -17,7 +18,7 @@ document.querySelector("#btn2").onclick = () => {
     var input = 10;
     loseRP(input);
 }
-
+*/
 function gainRP(RP) {
     socket.emit('gainRP', RP);
     // console.log('ti au adaugat 5 RP')
