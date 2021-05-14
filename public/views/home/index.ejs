@@ -1,52 +1,55 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>CazinoRoial</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="stylesheet" href="/css/layout.css">
-        <link rel="stylesheet" href="/css/home.css">
-
-        <script src="/js/home.js"></script>
-    </head>
-
-    <body>
-        <header></header>
-
-        <!-- exemplu includere cod backend in views -->
-        <!-- 
-            <% if (locals.userAuth) { %>
-                <p>Salut, <%= userAuth.full_name %></p>
-            <% } %> 
-        -->
-
-        <main>
-            <h1>Online Casino</h1>
-            
-            <% if (locals.message) { %>
-                <p style="color:rgb(21, 255, 0)"><%= locals.message %>    </p>
-            <% } %>
-
-            <% if (locals.user) { %>
-                <p>Salut, <%= user.username %> </p>
-
-                <a href="/games/slots">Play slots</a>
-                <a href="/games/roulette">Play roullete</a>
-                <p>RoialPointz: <%= user.rp %></p>
-                <form action="/accounts/logout" method="post">
-                    <button type="submit">Logout</button>
-                </form>
-            <% } else { %>   
-
-                <%- include('../partials/login') %>
-                <%- include('../partials/register') %>
-            <%} %>
-        </main>
-        
-        <!-- exemplu includere partial header -->
-        <%- include('../partials/footer') %>
-    </body>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Cazino Roial Home Page">
+		<meta name="keywords" content="casino, cazino, roial, royale, poker, ruleta, slots, pacanele, blackjack, home, acasa">
+		<meta name="author" content="Hîrhui Călin, Smeu Ștefan, Tică Constantin, Tudorache Theodor, Zaharia Cătălin">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cazino Roial - Home</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico"/>
+		<link href="../../css/layout.css" rel="stylesheet" type="text/css">
+		<link href="../../css/index.css" rel="stylesheet" type="text/css">
+	</head>
+<body>
+	<%- include('../partials/header.ejs') %>
+	<main>
+		<section id="games">
+			<div>
+				<figure>
+					<a href = "../games/roulette">
+						<!--<div class = "image-container">--->
+							<img src="../../img/roulette.jpg" alt="daroulette" title="Joacă la ruletă">
+							<!--<div class="playbtn">Play</div>
+						</div>-->
+					</a>
+						<figcaption>Ruleta</figcaption>
+				</figure>
+				<figure>
+					<a href = "../games/slots">
+							<img src="../../img/slots.jpg" alt="slots" title="Joacă slots">
+					</a>
+						<figcaption>Slots</figcaption>
+				</figure>
+			</div>
+			<div>
+				<figure>
+					<a href = "#">
+						<img src="../../img/poker.jpg" alt="poker" title="Joacă poker">
+					</a>
+						<figcaption>Poker</figcaption>
+				</figure>
+				<figure>
+					<a href = "#">
+						<img src="../../img/blackjack.jpg" alt="blackjack" title="Joacă blackjack">
+					</a>
+						<figcaption>Blackjack</figcaption>
+				</figure>
+			</div>
+		</section>
+	</main>
+	
+  <%- include('../partials/footer.ejs') %>
+</body>
 </html>
