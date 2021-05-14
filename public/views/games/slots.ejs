@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel="stylesheet" href="/css/slots.css">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="description" content="Cazino Roial Roulette Page">
 		<meta name="keywords" content="casino, cazino, roial, royale, poker, ruleta, slots, pacanele, blackjack">
@@ -12,8 +11,7 @@
 		<title>Cazino Roial - Slots</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico"/>
 		<link href="../../css/layout.css" rel="stylesheet" type="text/css">
-
-
+        <link rel="stylesheet" href="/css/slots.css">
         <script defer  src="/js/slots.js"></script>
         <script defer  src="/socket.io/socket.io.js"></script>
         <script defer  src="/js/socketIO.js"></script>
@@ -23,53 +21,55 @@
         <%- include('../partials/header') %>
         
         <main>
-            <div class="container">
-                <div class="machine">
-                    <div class="machine1">
-                        <div class="half-circle"></div>
-                        <div class="baseLightBulb"></div>
-                        <div class="upper"><div class="credits" id="credits"><%= user.rp %></div></div>
-                        <div class="trapazoid1"></div>
-                        <div class="middle">
-                            <div class="screen-wrapper">
-                                <div class="screen">
-                                    <div class="chamber-wrapper">
-                                    <div class="chamber"><img src="/img/slots/9.png" id="chamber1"></div>
-                                    <div class="chamber"><img src="/img/slots/9.png" id="chamber2"></div>
-                                    <div class="chamber"><img src="/img/slots/9.png" id="chamber3"></div>
+            <div class="center">
+                <div class="container">
+                    <div class="machine">
+                        <div class="machine1">
+                            <div class="half-circle"></div>
+                            <div class="baseLightBulb"></div>
+                            <div class="upper"><div class="credits" id="credits"><%= user.rp %></div></div>
+                            <div class="trapazoid1"></div>
+                            <div class="middle">
+                                <div class="screen-wrapper">
+                                    <div class="screen">
+                                        <div class="chamber-wrapper">
+                                        <div class="chamber"><img src="/img/slots/9.png" id="chamber1"></div>
+                                        <div class="chamber"><img src="/img/slots/9.png" id="chamber2"></div>
+                                        <div class="chamber"><img src="/img/slots/9.png" id="chamber3"></div>
+                                        </div>
                                     </div>
                                 </div>
+                            <div class="lever">
+                                <div class="circle"></div>
+                                <div><!-- 
+                                --><div class="leverSupport"></div><!--
+                                --><div class="leverLower"></div><!--
+                                --><div class="leverUpper"></div><!--
+                            --></div>
                             </div>
-                        <div class="lever">
-                            <div class="circle"></div>
-                            <div><!-- 
-                            --><div class="leverSupport"></div><!--
-                            --><div class="leverLower"></div><!--
-                            --><div class="leverUpper"></div><!--
-                        --></div>
-                        </div>
-                        </div>
-                        <div class="trapazoid2"></div>
-                        <div class="lower">
-                            <button class="play" id = "play">Play</button>
-                            <div class="stats">
-                                <div class="stats-interface">
-                                    <button class="increment" id="minus">-</button>
-                                    <div class="bet" id="bet">1</div>
-                                    <button class="increment" id="plus">+</button>
+                            </div>
+                            <div class="trapazoid2"></div>
+                            <div class="lower">
+                                <button class="play" id = "play">Play</button>
+                                <div class="stats">
+                                    <div class="stats-interface">
+                                        <button class="increment" id="minus">-</button>
+                                        <div class="bet" id="bet">1</div>
+                                        <button class="increment" id="plus">+</button>
+                                    </div>
+                                    <div class="won" id = "result">0</div>
                                 </div>
-                                <div class="won" id = "result">0</div>
                             </div>
                         </div>
+                        <div class="machine2"><img src="/img/slots/info.png"></div>
                     </div>
-                    <div class="machine2"><img src="/img/slots/info.png"></div>
                 </div>
+
             </div>
-            <br>
-            <button id="flip">Info</button>
         </main>
-        <!--
-        <%- include('../partials/footer') %> -->
+        <br>
+        <button id="flip">Info</button>
+        <%- include('../partials/footer') %>
         
     </body>
     
