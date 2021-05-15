@@ -357,5 +357,23 @@ function playRound(randomNumber){
     players.forEach(player=> player.checkFunds());
 }
 
+function changeBetAmount(){
+    button = document.getElementById("changeBetSpan");
+    if (betAmount == 10){
+        button.innerHTML = 'Bet Amount: 50';
+        betAmount=50;
+    }
+    else if (betAmount == 50){
+        button.innerHTML = 'Bet Amount: 100';
+        betAmount=100;
+    }
+    else {
+        button.innerHTML = 'Bet Amount: 10';
+        betAmount=10;
+    }
+    console.log(betAmount);
+}
+
+var betAmount=10;
+
 players.push(new Player("player", 1000));
-console.log("bani=",players[0].amount);

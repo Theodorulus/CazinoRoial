@@ -26,11 +26,13 @@
 
             <div class= "container">
                 <div class="main">
-                  <button type="button" class="btn" id="spin"><span class="btn-label">Spin</span></button>
-                  <button type="button" class="btn btn-reset" id="reset"><span class="btn-label">New Game</span></button>
-                  <button type="button" class="btn" id="spin"><span class="btn-label", onclick="players[0].undoBet()">Undo Bet</span></button>
-                  <button type="button" class="btn" id="spin"><span class="btn-label", onclick="players[0].clearBets()">Clear Bets</span></button> 
-            
+                  
+                    <button type="button" class="btn" id="spin"><span class="btn-label">Spin</span></button>
+                    <button type="button" class="btn btn-reset" id="reset"><span class="btn-label">New Game</span></button>
+                    <button type="button" class="btn" id="undoBet" onclick="players[0].undoBet()"><span class="btn-label">Undo Bet</span></button>
+                    <button type="button" class="btn" id="clearBets" onclick="players[0].clearBets()"><span class="btn-label">Clear Bets</span></button> 
+                    <button type="button" class="btn" id="changeBet" onclick="changeBetAmount()"><span id= "changeBetSpan" class="btn-label">Bet Amount: 10</span></button> 
+
                   <div class="plate" id="plate">
                     <ul class="inner">
                       <li class="number"><label><input type="radio" name="pit" value="0" /><span class="pit">0</span></label></li>
@@ -90,7 +92,7 @@
                   </div>
                 </div>
             
-                <img src="roulette_table.png" alt="roulette_table" usemap="#table", class="betTable">
+                <img src="../../img/roulette_table.png" alt="roulette_table" usemap="#table", class="betTable">
             
                   <map name="table">
                     <area shape="rect", coords="168,182,226,206" onclick="bet(159)">
