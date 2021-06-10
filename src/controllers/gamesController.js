@@ -12,6 +12,13 @@ const roulette = (req, res) => {
 	res.render("games/roulette", viewBag);
 }
 
+const poker = (req, res) => {
+    viewBag = {
+        user: req.userData
+    }
+	res.render("games/poker", viewBag);
+}
+
 module.exports = {
-    slots, roulette
+    slots, roulette, poker
 }

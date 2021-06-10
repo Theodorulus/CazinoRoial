@@ -1,0 +1,35 @@
+.body {
+    align-items: center;
+}
+
+
+
+#table-wrapper {
+    position: relative;
+    width: 63vw;
+    height:  32.5vw;
+    background: rgb(36, 36, 36);
+    -moz-border-radius: 30vw / 15vw;
+    -webkit-border-radius: 30vw / 15vw;
+    border-radius: 30vw / 15vw;
+
+}
+
+
+#table {
+    position: absolute;
+    width: 60vw;
+    height: 30vw;
+    margin-top: 0.5vw;
+    margin-left: 1.5vw;
+    background: radial-gradient(rgb(128, 194, 75), rgb(18, 97, 11));
+    -moz-border-radius: 30vw / 15vw;
+    -webkit-border-radius: 30vw / 15vw;
+    border-radius: 30vw / 15vw;
+    /*Logo*/
+    text-align: center;
+    color: rgb(90, 133, 55);
+    font-weight: bold;
+    font-size: 4vw;
+    line-height: 30vw;
+}
