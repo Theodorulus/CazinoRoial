@@ -10,21 +10,7 @@ const path = require('path');
 const session = require('./src/config/sessionConfig')
 
 const io = require('socket.io')(server);
-
-const {gainRP, loseRP} = require('./src/modules/manageRoialPointz')
-const cookie = require('cookie')
-
-io.on('connection', socket => {
-	var raw = cookie.parse(socket.handshake.headers.cookie);
-	var sessionId = raw['connect.sid'].split(":")[1].split('.')[0];
-
-	socket.on('gainRP', RP => {
-		gainRP(sessionId, RP);
-	})
-	socket.on('loseRP', RP => {
-		loseRP(sessionId, RP);
-	})
-})
+require('./src/modules/socketIO')(io)
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, "public/views"));
@@ -50,7 +36,8 @@ app.use('/accounts', accountRouter)
 
 //GAMES
 const gamesRouter = require('./src/routes/gamesRoutes')
-const { redirectUnauthorizedUser } = require('./src/middlewares/authorizations')
+const { redirectUnauthorizedUser } = require('./src/middlewares/authorizations');
+const { use } = require('./src/routes/homeRoutes');
 app.use('/games', redirectUnauthorizedUser, gamesRouter)
 
 // app.use('/play', playRouter)
