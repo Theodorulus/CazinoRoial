@@ -1,35 +1,125 @@
-.body {
+main {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    margin-top: 2vw;
+    margin-bottom: 14vw;
 }
 
 
-
-#table-wrapper {
+.table-wrapper {
     position: relative;
-    width: 63vw;
+    width: 62vw;
     height:  32.5vw;
-    background: rgb(36, 36, 36);
+    background: linear-gradient(90deg, rgba(31,31,31,1) 0%, rgba(62,62,62,1) 36%, rgba(62,62,62,1) 65%, rgba(31,31,31,1) 100%);
     -moz-border-radius: 30vw / 15vw;
     -webkit-border-radius: 30vw / 15vw;
     border-radius: 30vw / 15vw;
 
 }
 
-
-#table {
+.table {
     position: absolute;
     width: 60vw;
     height: 30vw;
     margin-top: 0.5vw;
+    margin-left: 1vw;
+    background: radial-gradient(#309259 , #145832);
+    -moz-border-radius: 30vw / 15vw;
+    -webkit-border-radius: 30vw / 15vw;
+    border-radius: 30vw / 15vw;
+}
+
+.inner-circle {
+    width: 56vw;
+    height: 26vw;
+    margin-top: 1vw;
     margin-left: 1.5vw;
-    background: radial-gradient(rgb(128, 194, 75), rgb(18, 97, 11));
+    border: 0.5vw solid #257c4b;
+    background: solid transparent;
     -moz-border-radius: 30vw / 15vw;
     -webkit-border-radius: 30vw / 15vw;
     border-radius: 30vw / 15vw;
     /*Logo*/
     text-align: center;
-    color: rgb(90, 133, 55);
+    color: #3ba268;
     font-weight: bold;
     font-size: 4vw;
-    line-height: 30vw;
+    line-height: 26vw;
+}
+
+.sit1 {
+    position: absolute;
+    display: inline-block;
+    top: 13vw;
+    left: 0.5vw;
+}
+
+
+.sit2 {
+    position: absolute;
+    display: inline-block;
+    top: 33vw;
+    left: 6vw;
+}
+
+
+.sit3 {
+    position: absolute;
+    display: inline-block;
+    top: 39vw;
+    left: 41vw;
+}
+
+
+.sit4 {
+    position: absolute;
+    display: inline-block;
+    top: 33vw;
+    right: 6vw;
+}
+
+.sit5 {
+    position: absolute;
+    display: inline-block;
+    top: 13vw;
+    right: 0.5vw;
+}
+
+
+.profile {
+    margin-left: 2vw;
+    height: 7vw;
+    width: 6vw;
+}
+
+.banner {
+    background-color: rgb(49, 49, 49);
+    width: 17vw;
+    height: 4vw;
+    border-radius: 3vw;
+    font-size: 1.5vw;
+    color: rgb(151, 151, 151);
+    text-align: center;
+    font-weight: bold;
+}
+
+.card1 {
+    margin-top: 3vw;
+    margin-left: 1vw;
+    position: absolute;
+    height: 7.2vw;
+    width: 4.6vw;
+    transform: rotate(-15deg);
+    z-index: -1;
+}
+
+.card2 {
+    margin-top: 3vw;
+    margin-left: 4vw;
+    position: absolute;
+    height: 7.2vw;
+    width: 4.6vw;
+    transform: rotate(10deg);
+    z-index: -1;
 }
