@@ -1,4 +1,4 @@
-const {loseRPbySession, loseRPbyUserId, gainRPbySession, gainRPbyUserId} = require('../modules/manageRoialPointz')
+const {loseRPbySession, loseRPbyUserId, gainRPbySession, gainRPbyUserId, addPokerHandPlayed, addPokerHandWon} = require('./manageUserProfile')
 const cookie = require('cookie')
 const db = require('../config/dbConnection').db
 var Hand = require('pokersolver').Hand;
@@ -231,9 +231,10 @@ class PokerRoom {
 		for (let player of this.players){
 			player.cards = [this.getRandomCard(), this.getRandomCard()]
 			player.inGameStatus = PokerPlayer.inGameStatus.in
+
+			addPokerHandPlayed(player.userId)
 		}
 
-		console.log("Primul pas: ", this.turn)
 		this.sendDataBackToPlayers((player, hisTurn) => {
 			if (hisTurn) return { actions: this.actions, info: "smallblind"}
 			else 		 return { turn: this.turn }
@@ -384,6 +385,9 @@ class PokerRoom {
 				let player = this.players[i]
 				if (player.inGameStatus == PokerPlayer.inGameStatus.in) {
 					player.gainRP(this.pot)
+
+					addPokerHandWon(player.userId)
+
 					this.io.to(connectedUsers.get(player.userId)).emit('winner', {gain: this.pot, rp: player.rp})
 				} else if (connectedUsers.get(player.userId)){
 					this.io.to(connectedUsers.get(player.userId)).emit('loser', {rp: player.rp})
@@ -411,6 +415,9 @@ class PokerRoom {
 		for (let player of this.players) {
 			if (winners.includes(player)){
 				player.gainRP(this.pot / winners.length)
+
+				addPokerHandWon(player.userId)
+
 				let data = {
 					gain: this.pot, 
 					rp: player.rp, 
@@ -547,7 +554,7 @@ io.on('connection', socket => {
 
 	//  POKER ---------------------------------------------------------------------------------------------------------
 	socket.on('newPokerRoom', roomName => {
-		if (roomName.length  < 1) return;
+		if (!roomName || roomName.length  < 1) return;
 		getUserData(socket, (user) => {
 			admin = new PokerPlayer(user.id, user.Username, user.rp)
 			pokerRoom = new PokerRoom(io, roomName, admin)

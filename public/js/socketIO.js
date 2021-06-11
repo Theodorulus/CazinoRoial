@@ -163,5 +163,22 @@ function loseRP(RP) {
 // })
 
 
-
+socket.on('winner', data => {
+    console.log("Ai castigat:",data)
+})
+socket.on('loser', data => {
+    console.log("Ai pierdut:",data)
+})
+socket.on('play', data => {
+    console.log("Joaca:",data)
+})
+socket.on('wait', data => {
+    console.log("Asteapta:",data)
+})
+socket.on('someoneJoined', data => {
+    console.log("Someone joined:",data)
+})
+socket.on('getPokerRooms', data => {
+    console.log("Rooms:",data)
+})
 

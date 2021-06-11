@@ -46,6 +46,22 @@ async function loseRPbySession(sessionId, rp) {
     })
 }
 
+async function addPokerHandWon(userId) {
+    db.query('UPDATE profile SET PokerHandsWon = PokerHandsWon + 1 WHERE UserId = ?', [userId], (error) => {
+        if (error){
+            console.log(error)
+        }
+    })
+}
+
+async function addPokerHandPlayed(userId) {
+    db.query('UPDATE profile SET PokerHandsPlayed = PokerHandsPlayed + 1 WHERE UserId = ?', [userId], (error) => {
+        if (error){
+            console.log(error)
+        }
+    })
+}
 
 
-module.exports = { gainRPbySession, gainRPbyUserId, loseRPbySession, loseRPbyUserId }
+
+module.exports = { gainRPbySession, gainRPbyUserId, loseRPbySession, loseRPbyUserId, addPokerHandPlayed, addPokerHandWon }

@@ -37,7 +37,6 @@ app.use('/accounts', accountRouter)
 //GAMES
 const gamesRouter = require('./src/routes/gamesRoutes')
 const { redirectUnauthorizedUser } = require('./src/middlewares/authorizations');
-const { use } = require('./src/routes/homeRoutes');
 app.use('/games', redirectUnauthorizedUser, gamesRouter)
 
 // app.use('/play', playRouter)
