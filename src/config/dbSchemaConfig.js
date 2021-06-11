@@ -15,6 +15,8 @@ const createProfileTable = `
         RoialPointz INT NOT NULL DEFAULT 100,
         Phone VARCHAR(20),
         Birthdate DATE,
+        PokerHandsWon INT DEFAULT 0,
+        PokerHandsPlayed INT DEFAULT 0,
         UserId INT NOT NULL UNIQUE,
         CONSTRAINT profile_id_pk PRIMARY KEY(id),
         CONSTRAINT profile_userid_fk FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
