@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Cazino Roial Roulette Page">
+		<meta name="keywords" content="casino, cazino, roial, royale, poker, ruleta, slots, pacanele, blackjack">
+		<meta name="author" content="Hîrhui Călin, Smeu Ștefan, Tică Constantin, Tudorache Theodor, Zaharia Cătălin">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cazino Roial - Slots</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico"/>
+		<link href="../../css/layout.css" rel="stylesheet" type="text/css">
+        <link href="../../css/profile.css" rel="stylesheet" type="text/css">
+        <script src="/js/home.js"></script>
+        <script src="/js/profile.js"></script>
+    </head>
+    <body>
+        <%- include('../partials/header') %>
+        
+        <main>
+<p></p>
+<div>
+    <div class="card-container avatar-container">
+        <% if (itemsInUse[0] != null) { %>
+        <img class="profileImage" style="margin-bottom:-50px; position:relative; z-index:2" src="<%= `../../img/items/hats/${itemsInUse[0][0]}` %>" alt="item" />
+        <%} if (itemsInUse[1] != null) { %>
+        <img class="profileImage" src="<%= `../../img/items/avatars/${itemsInUse[1][0]}` %>" alt="item" />
+        <% } else { %>
+        <img class="profileImage" src="<%= `../../img/items/defaultUser.png` %>" alt="item" />    
+        <% } %>
+        <h1><%= user.username %></h1>
+        <h3>Roial Pointz: <span class="red"><%= user.rp%></span></h3>
+    </div>
+    <div class="card-container" style="width:100%; ">
+        <h2 class="card-container title">Inventar</h2>
+        <% if (locals.error != undefined) { %>
+            <p><%= error%></p>
+        <% } %>
+        <% for (var i = 0; i < userItems.length; i++) { %>
+            <div class="item-container">        
+                <div class="item">
+                    <img class="itemImage" src="<%= `../../img/items/${userItems[i][1]}s/${userItems[i][0]}` %>" alt="item" />
+                </div>
+                <% if (userItems[i][0] == "box.png") { %>
+                    <button class="primary box" onclick="openBox(this)">Use</button>
+                <% } else {%>
+                    <form action="<%=`useItem/${userItems[i][0]}`%>" method="post"><button class="primary">Use</button></form>
+                <% } %>
+            </div>
+            
+        <% } %>
+
+        <h2 class="card-container title">Magazin</h2>
+            <% for (var i = 0; i < avatars.length; i++) { %>
+                <div class="item-container">        
+                    <div class="item">
+                        <img class="itemImage" src="<%= `../../img/items/avatars/${avatars[i]}` %>" alt="item" />
+                    </div>
+                    <p><%= avatarsPrices[i] %></p>
+                    <form action="<%=`buyItem/${avatars[i]}/${avatarsPrices[i]}`%>" method="post"><button class="primary">Buy</button></form>
+                </div>
+                
+            <% } %>
+            <% for (var i = 0; i < hats.length; i++) { %>
+                <div class="item-container">        
+                    <div class="item">
+                        <img class="itemImage" src="<%= `../../img/items/hats/${hats[i]}` %>" alt="item" />
+                    </div>
+                    <p><%= hatsPrices[i] %></p>
+                    <form action="<%=`buyItem/${hats[i]}/${hatsPrices[i]}`%>" method="post"><button class="primary">Buy</button></form>
+                </div>
+                
+            <% } %>
+            <div class="item-container">        
+                <div class="item">
+                    <img class="itemImage" src="<%= `../../img/items/boxs/box.png` %>" alt="item" />
+                </div>
+                <p>75</p>
+                <form action="<%=`buyItem/box.png/75`%>" method="post"><button class="primary">Buy</button></form>
+            </div>
+            <%= %>
+    </div>
+
+    
+<!-- The Modal -->
+<div id="boxModal" class="modal">
+
+    <div class="modal-content">
+      <p id="modalText">Some text in the Modal..</p>
+      <img id="modalImg" class="profileImage"/>
+      <form action="" method="post"id="modalForm"> <button class="primary" id="closeModal" onclick="closeModal">Ok</button></form>
+    </div>
+  
+  </div>
+
+
+</div>
+</main>
+    </body>
