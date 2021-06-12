@@ -11,8 +11,9 @@
 			<div class = "user">
 				<% if (locals.user) { %>
 					<div>
-						<span>User: <%= user.username %> - RoialPointz: <%= user.rp %></span>
-						<%- include('../partials/logout') %>
+						<li id="logout-li"><%- include('../partials/logout') %></li>
+						<li><a href="/accounts/register">VEZI PROFIL</a></li>
+						
 					</div>
 				<% } else { %>
 					<li><a href="/accounts/login">LOGARE</a></li>
