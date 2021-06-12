@@ -24,6 +24,10 @@ function loseRP(RP) {
     socket.emit('loseRP', RP);
 }
 
+socket.on('getUpdatedRP', rp => {
+    console.log(rp)
+})
+
 // //-----------------------POKER CHANNELS--------------------------
 
 // // cerere de a crea un room nou cu tine ca admin
