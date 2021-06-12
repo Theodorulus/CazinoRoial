@@ -46,12 +46,7 @@ showNumber = '00';
 
 $('.result-number').text(showNumber);
 $('.result-color').text(color);
-if (color=='green'){
-    $('.result').css({'background-color': ''+'rgb(6,118,75)'+''});
-}
-else{
-    $('.result').css({'background-color': ''+color+''});
-}
+$('.result').css({'background-color': ''+color+''});
 $data.addClass('reveal');
 $inner.addClass('rest');
 
@@ -62,6 +57,7 @@ $('.previous-list').prepend($thisResult);
 
 }, timer);
 playRound(randomNumber);
+console.log('bani=',players[0].amount);
 });
 
 
@@ -90,6 +86,7 @@ if($spin.is(':visible')){
 // 
 // 
 // 
+var players=[];
 
 //37 reprezinta pariu pe 00
 var VALID_BETS=[
@@ -130,7 +127,7 @@ var VALID_BETS=[
 [33],
 [34],
 [35],
-[36], //index 37
+[36],
 
 [0,37], //perechi cu 0 si 00
 [0,1],
@@ -262,8 +259,8 @@ var VALID_BETS=[
 [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],//1st 18
 [19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36],
 
-[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36],
 [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35],//odd
+[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36],
 
 [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36],//red
 [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35]//black
@@ -291,11 +288,7 @@ class Player {
         if (this.amount>=amount){
             this.amount-=amount;
             this.bets.push(new Bet(this.id, amount, VALID_BETS[betIndex], VALID_PAYOUTS[betIndex]));
-
-            let betLog ='<li class="previous-result color-green"><span class="previous-number">'+ "Placed bet for "+amount+' on '+ VALID_BETS[betIndex] +'</span></li>';
-            betLog= betLog.replace("37", "00");
-            $('.betting-queue').prepend(betLog)
-            this.updateMoneyBar()
+            console.log("placed bet for ",amount,' on ', VALID_BETS[betIndex]);
         }
         else{
             console.log("not enough funds for this bet");
@@ -306,13 +299,11 @@ class Player {
         betSum += this.bets.reduce( (p, c) => p+c.amount, 0);
         if (betSum <= this.amount){
             this.amount-=betSum;
-            this.updateMoneyBar()
             return true;
         }
         else{
             console.log("not enough funds for the last bets");
             this.bets=[];
-            this.updateMoneyBar()
             return false;
         }
     }
@@ -320,30 +311,18 @@ class Player {
         this.bets.forEach(bet => {
             if (bet.winCondition(spinResult)){
                 this.amount+=bet.amount*(bet.payout+1);
-                this.updateMoneyBar();
             }
         });
     }
     undoBet(){
         this.amount+=this.bets[this.bets.length-1].amount;
         this.bets.pop();
-        let betQueue = document.getElementById("betting-queue");
-        betQueue.removeChild(betQueue.firstChild)
-        this.updateMoneyBar()
     }
     clearBets(){
         this.amount += this.bets.reduce( (p, c) => p+c.amount, 0);
         this.bets=[];
-        let betQueue = document.getElementById("betting-queue");
-        betQueue.innerHTML=""
-        this.updateMoneyBar()
-    }
-
-    updateMoneyBar(){
-        document.getElementById("money-bar").innerHTML="RoialPoints: "+this.amount;
     }
 }
-
 
 class Bet {
     constructor(player, amount, condition, payout){
@@ -363,24 +342,19 @@ class Bet {
 }
 
 function randomSpin(){
-    // return 0
     return Math.floor(Math.random() * 38);
 }
 
-function bet(index){
-    player.placeBet(betAmount, index);
+function bet(index, amount= 100){
+    players[0].placeBet(amount, index);
     // console.log(VALID_BETS[]);
 }
 
 function playRound(randomNumber){
     let spinResult = randomNumber;
     console.log("Spin=", spinResult);
-    setTimeout(function() {
-        player.checkWins(spinResult);
-        player.checkFunds();
-    }, timer+200);
-    
-    
+    players.forEach(player => player.checkWins(spinResult));
+    players.forEach(player=> player.checkFunds());
 }
 
 function changeBetAmount(){
@@ -400,25 +374,6 @@ function changeBetAmount(){
     console.log(betAmount);
 }
 
-function coordMultiplier(string, multiplier){
-    let numbers = (string.split(","));//.forEach(number => parseInt(number)*multiplier);
-    for (let i=0; i<numbers.length; i++){
-        numbers[i]=parseInt(numbers[i]*multiplier);
-    }
-    result="";
-    numbers.forEach(number => result+=number+',');
-    return result.slice(0,-1);
-}
-
-$(function() {
-    $('.map').maphilight();
-    let imageRatio = parseInt(document.getElementsByClassName('map')[0].style.width,10) /1148; //1148=original image width
-    let tableAreas = document.getElementById('table-areas').children;
-    for (let i=0; i< tableAreas.length; i++){
-        tableAreas[i].coords= coordMultiplier(tableAreas[i].coords, imageRatio);
-    }
-});
-
 var betAmount=10;
-player= new Player("player", 1000);
-player.updateMoneyBar();
+
+players.push(new Player("player", 1000));
