@@ -175,10 +175,15 @@ socket.on('play', data => {
 socket.on('wait', data => {
     console.log("Asteapta:",data)
 })
+
 socket.on('someoneJoined', data => {
     console.log("Someone joined:",data)
 })
 socket.on('getPokerRooms', data => {
     console.log("Rooms:",data)
 })
+socket.on('getAdminData', data => {
+    //data = userName, rp, inGame 
+})
+
 

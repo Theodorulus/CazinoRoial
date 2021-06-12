@@ -123,3 +123,13 @@ main {
     transform: rotate(10deg);
     z-index: -1;
 }
+
+.lobbyList {
+    /*display: inline;*/
+    display: inline;
+}
+
+.dis {
+    display: none;
+    /*stergi display*/
+}

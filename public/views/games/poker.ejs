@@ -12,89 +12,93 @@
 		<link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico"/>
 		<link href="../../css/layout.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="/css/poker.css">
-        <script defer  src="/js/poker.js"></script>
         <script defer  src="/socket.io/socket.io.js"></script>
         <script defer  src="/js/socketIO.js"></script>
+        <script defer  src="/js/poker.js"></script>
         <script src="/js/home.js"></script>
     </head>
     <body>
 
         <%- include('../partials/header') %>
+        <br>
+        <button id="create" class="lobbyList">Create New Room</button>
+        <input type="text" class="lobbyList" id="roomName"><br>
+        <button id="show" class="lobbyList">Show Existing Rooms</button>
+        <div id="rooms" class="lobbyList"></div>
 
-        <main>
+        <div class="dis" id="lbby">
+            <main class="lobby">
 
-            <div class="table-wrapper">
-                <div class="table">
-                    <div class="inner-circle">CAZINO ROIAL</div>
+                <div class="table-wrapper lobby">
+                    <div class="table lobby">
+                        <div class="inner-circle lobby">CAZINO ROIAL</div>
+                    </div>
+                </div>
+
+
+            </main>
+
+            <div class="sit1 lobby">
+                <div class="images lobby">
+                    <img src="/img/avatars/no_avatar.png" class="profile lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+                </div>
+                <div class="banner lobby" id="banner1">Waiting For Players...
+                </div>
+            </div>
+
+            <div class="sit2 lobby">
+                <div class="images lobby">
+                    <img src="/img/avatars/no_avatar.png" class="profile lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+                </div>
+                <div class="banner lobby" id="banner2">Waiting For Players...
                 </div>
             </div>
 
 
-        </main>
-
-        <div class="sit1">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
+            <div class="sit3 lobby">
+                <div class="images lobby">
+                    <img src="/img/avatars/no_avatar.png" class="profile lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+                </div>
+                <div class="banner lobby" id="banner3">Waiting For Players...
+                </div>
             </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
-        </div>
-
-        <div class="sit2">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
-            </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
-        </div>
-
-
-        <div class="sit3">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
-            </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
-        </div>
 
 
 
-        <div class="sit4">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
+            <div class="sit4 lobby">
+                <div class="images lobby">
+                    <img src="/img/avatars/no_avatar.png" class="profile lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+                </div>
+                <div class="banner lobby" id="banner4">Waiting For Players...
+                </div>
             </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
-        </div>
 
 
 
-        <div class="sit5">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
+            <div class="sit5 lobby">
+                <div class="images lobby">
+                    <img src="/img/avatars/no_avatar.png" class="profile lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+                    <img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+                </div>
+                <div class="banner lobby" id="banner5">Waiting For Players...
+                </div>
             </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
+
+            <button id="startGame">Start</button>
+            <button id="fold">Fold</button>
+            <button id="check">Check</button>
+            <button id="call">Call</button>
+            <button id="bet">Bet</button>
+            <button id="raise">Raise</button>
         </div>
 
         <%- include('../partials/footer') %>
