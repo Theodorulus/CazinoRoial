@@ -12,90 +12,197 @@
 		<link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico"/>
 		<link href="../../css/layout.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="/css/poker.css">
-        <script defer  src="/js/poker.js"></script>
         <script defer  src="/socket.io/socket.io.js"></script>
         <script defer  src="/js/socketIO.js"></script>
+        <script defer  src="/js/poker.js"></script>
         <script src="/js/home.js"></script>
     </head>
     <body>
 
         <%- include('../partials/header') %>
+        <br>
+		<div id = "lobbyList" class="hidden">
+			<button id="create" class="create_join_btn">Creează o nouă cameră</button>
+			<input type="text" class="lobbyList" placeholder="Numele noii camere" maxlength="12" id="roomName" ><br>
+			<button id="show_rooms" class="create_join_btn">Arată camerele existente</button>
+			<ul id="rooms" class="hidden">
+				<li><div class="room_name">♣ R</div><button id="go" class="joinbtn"> Intră </button ><div class="number_of_players">1/5</div></li>
+				<li><div class="room_name">♣ R0</div><button class="joinbtn"> Intră </button><div class="number_of_players">2/5</div></li>
+				<li><div class="room_name">♣ ROO</div><button class="joinbtn"> Intră </button><div class="number_of_players">2/5</div></li>
+				<li><div class="room_name">♣ ROOM 2</div><button class="joinbtn"> Intră </button><div class="number_of_players">4/5</div></li>
+				<li><div class="room_name">♣ ROOM 13</div><button class="joinbtn"> Intră </button><div class="number_of_players">5/5</div></li>
+				<li><div class="room_name">♣ ROOM 2432</div><button class="joinbtn"> Intră </button><div class="number_of_players">4/5</div></li>
+				<li><div class="room_name">♣ ROOM 1423552</div><button class="joinbtn"> Intră </button><div class="number_of_players">2/5</div></li>
+				<li><div class="room_name">♣ dadadwqwqdqw</div><button class="joinbtn"> Intră </button><div class="number_of_players">1/5</div></li>
+			</ul>
+		</div>
 
-        <main>
-
-            <div class="table-wrapper">
-                <div class="table">
-                    <div class="inner-circle">CAZINO ROIAL</div>
+        <main id="poker_table" class="">
+			<!--
+			<button class = "sit2 leavebtn">Părăsește camera</button>
+			-->
+			
+			<div class="startbtn">
+				Incepe jocul
+			</div>
+			
+			<div class="leavebtn">
+				<img src="/img/poker/exit.png">
+			</div>
+			
+			
+			
+            <div class="table-wrapper lobby">
+                <div class="table lobby">
+                    <div class="inner-circle lobby">CAZINO ROIAL</div>
                 </div>
             </div>
+			
+			<div id="pot">
+				5678 RP
+			</div>
+			
+			<div id="dealer-token" class="token-at-player3">
+				<img src="/img/poker/chip_dealer.png" class="profile lobby">
+			</div>
+			
+			<!--
+			<div id="cards">
+				
+					<div id="card1" class="card black-card"><div class="value">7</div><div class="symbol">♣️</div></div> 
+					<div id="card2" class="card red-card"><div class="value">8</div><div class="symbol">♦️</div></div>
+					<div id="card3" class="card red-card"><div class="value">9</div><div class="symbol">♥️</div></div>
+					<div id="card4" class="card black-card"><div class="value">10</div><div class="symbol">♠️</div></div>
+					<div id="card5" class="card red-card"><div class="value">K</div><div class="symbol">♥️</div></div>
+				
+					
+					
+			</div> -->
+			
+			
+			<div id="cards1">
+				<div id="card1" class=""><img src="/img/poker/cards/2C.png"></div>
+				<div id="card2" class=""><img src="/img/poker/cards/2C.png"></div>
+				<div id="card3" class=""><img src="/img/poker/cards/2C.png"></div>
+				<div id="card4" class=""><img src="/img/poker/cards/2C.png"></div>
+				<div id="card5" class=""><img src="/img/poker/cards/2C.png"></div>
+			</div>
+
+			<div class="sit1 lobby">
+				<div class="images lobby">
+					<img src="/img/avatars/no_avatar.png" class="profile lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+				</div>
+				<div class="banner lobby">
+					<div class="username">
+						Username
+					</div>
+					<div class="balance">
+						300 RP
+					</div>
+				</div>
+			</div>
+			
+			<div id="pot-player1">
+				5 RP
+			</div>
+
+			<div class="sit2 lobby">
+				<div class="images lobby">
+					<img src="/img/avatars/no_avatar.png" class="profile lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+				</div>
+				<div class="banner lobby">
+					<div class="username">
+						Username
+					</div>
+					<div class="balance">
+						300 RP
+					</div>
+				</div>
+			</div>
+				
+			<div id="pot-player2">
+				90 RP
+			</div>
+
+			<div class="sit3 lobby">
+				<div class="images lobby">
+					<img src="/img/avatars/no_avatar.png" class="profile lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+				</div>
+				<div class="banner lobby">
+					<div class="username">
+						Username
+					</div>
+					<div class="balance">
+						300 RP
+					</div>
+				</div>
+			</div>
+			
+			<div id="pot-player3">
+				500 RP
+			</div>
 
 
-        </main>
-
-        <div class="sit1">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
-            </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
-        </div>
-
-        <div class="sit2">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
-            </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
-        </div>
+			<div class="sit4 lobby">
+				<div class="images lobby">
+					<img src="/img/avatars/no_avatar.png" class="profile lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+				</div>
+				<div class="banner lobby">
+					<div class="username">
+						Username
+					</div>
+					<div class="balance">
+						300 RP
+					</div>
+				</div>
+			</div>
+			
+			<div id="pot-player4">
+				9999 RP
+			</div>
 
 
-        <div class="sit3">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
-            </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
-        </div>
-
-
-
-        <div class="sit4">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
-            </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
-        </div>
-
-
-
-        <div class="sit5">
-            <div class="images">
-                <img src="/img/avatars/no_avatar.png" class="profile">
-                <img src="/img/avatars/deck_5_large.png" class="card1">
-                <img src="/img/avatars/deck_5_large.png" class="card2">
-            </div>
-            <div class="banner">Username
-                <br>
-                300 RP
-            </div>
-        </div>
+			<div class="sit5 lobby">
+				<div class="images lobby">
+					<img src="/img/avatars/no_avatar.png" class="profile lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+				</div>
+				<div class="banner lobby">
+					<div class="username">
+						Username
+					</div>
+					<div class="balance">
+						300 RP
+					</div>
+				</div>
+			</div>
+			
+			<div id="pot-player5">
+				99000 RP
+			</div>
+			
+			<div class="play-buttons">
+				<button id="fold"> FOLD </button>
+				<button id="check" class="hidden"> CHECK </button>
+				<button id="check" > CALL </button>
+				<button id="bet"> BET </button>
+				<div id="slider" class="slider-container hidden">
+					<input type="range"  min="1" max="10000" value="1" class="slider" id="slider_input"></input>
+				</div>
+				<button id="bet_amount" class="hidden"> 100 RP </button>
+				
+			</div>
+		</main>
+		
 
         <%- include('../partials/footer') %>
         

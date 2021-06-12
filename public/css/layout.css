@@ -39,6 +39,7 @@ nav {
 
 nav ul {
 	list-style-type: none;
+	/*overflow: hidden;*/
 }
 
 nav ul li {
@@ -58,6 +59,7 @@ nav ul li:hover {
 .user {
 	float: right;
 	font-weight: normal;
+	overflow: hidden;
 }
 
 .user li {
@@ -70,6 +72,34 @@ nav ul a {
 	margin-bottom: 10px;
 	
 }
+
+.user form {
+	height: 100%;
+}
+
+.user form button {
+	height: 100%;
+}
+
+.user button {
+	float: right;
+	background-color: #1b0024;
+	border: none;
+	color: #afabb3;
+	font-size: 17px;
+	
+}
+
+.hover-bcg {
+	background-color: #322145;
+}
+
+.user button:hover {
+	background-color: #322145;
+}
+
+
+
 
 .icon {
 	background: url("../images/ruleta.png");
