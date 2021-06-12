@@ -1,6 +1,6 @@
 const db = require('../config/dbConnection').db
 
-async function gainRPbyUserId(userId, rp) {
+async function gainRPbyUserId(userId, rp, callback) {
     db.query(`
         UPDATE profile 
         SET RoialPointz = RoialPointz + ?
@@ -9,21 +9,23 @@ async function gainRPbyUserId(userId, rp) {
         if (error) {
             console.log(error);
         }
+
+        callback(userId)
     })
 }
 
-async function gainRPbySession(sessionId, rp) {
+async function gainRPbySession(sessionId, rp, callback) {
     db.query(`SELECT data FROM sessions WHERE session_id = ?`, [sessionId], (error, result) => {
         if (error) {
             console.error(error);
         }
         var userId = JSON.parse(result[0].data).userLoggedIn;
 
-        gainRPbyUserId(userId, rp)
+        gainRPbyUserId(userId, rp, callback)
     })
 }
 
-async function loseRPbyUserId(userId, rp) {
+async function loseRPbyUserId(userId, rp, callback) {
     db.query(`
         UPDATE profile 
         SET RoialPointz = RoialPointz - ?
@@ -32,17 +34,19 @@ async function loseRPbyUserId(userId, rp) {
         if (error) {
             console.log(error);
         }
+
+        callback(userId)
     })
 }
 
-async function loseRPbySession(sessionId, rp) {
+async function loseRPbySession(sessionId, rp, callback) {
     db.query(`SELECT data FROM sessions WHERE session_id = ?`, [sessionId], (error, result) => {
         if (error) {
             console.error(error);
         }
         var userId = JSON.parse(result[0].data).userLoggedIn;
 
-        loseRPbyUserId(userId, rp)
+        loseRPbyUserId(userId, rp, callback)
     })
 }
 
