@@ -586,24 +586,10 @@ io.on('connection', socket => {
     })
 
 	socket.on('gainRP', RP => {
-		gainRPbySession(getSessionId(socket), RP, (userId) => {
-			db.query('select RoialPointz from profile where UserId = ?', [userId], (err, res) => {
-				if (err) {
-					console.log(err)
-				}
-				io.to(socket.id).emit('getUpdatedRP', res[0].RoialPointz)
-			})
-		});
+		gainRPbySession(getSessionId(socket), RP);
 	})
 	socket.on('loseRP', RP => {
-		loseRPbySession(getSessionId(socket), RP, (userId) => {
-			db.query('select RoialPointz from profile where UserId = ?', [userId], (err, res) => {
-				if (err) {
-					console.log(err)
-				}
-				io.to(socket.id).emit('getUpdatedRP', res[0].RoialPointz)
-			})
-		});
+		loseRPbySession(getSessionId(socket), RP);
 	})
 
 	//  POKER ---------------------------------------------------------------------------------------------------------
