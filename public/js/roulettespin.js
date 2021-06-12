@@ -422,3 +422,4 @@ $(function() {
 var betAmount=10;
 player= new Player("player", 1000);
 player.updateMoneyBar();
+ 
