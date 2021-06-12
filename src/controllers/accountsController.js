@@ -1,5 +1,5 @@
 var db = require('../config/dbConnection.js').db;
-const rpManager = require('../modules/manageRoialPointz')
+const rpManager = require('../modules/manageUserProfile')
 const bcrypt = require('bcrypt');
 const fs = require("fs");
 // dupa login/register (post) cu succes de obicei trebuie redirect catre pagina principala
@@ -235,7 +235,7 @@ const buyItem = (req, res) => {
 					"errorRegister":"Internal server error"
 				})
 			}
-			rpManager.loseRP(req.session.id, price)
+			rpManager.loseRPbySession(req.session.id, price)
 			res.redirect("/accounts/profile")
 		})
 	}

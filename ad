@@ -1,0 +1,285 @@
+[33mcommit e5ae22fa8b782934f3881eda261215703cd29583[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: 08e4f07 2c93c69
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Sat Jun 12 15:40:58 2021 +0300
+
+    hotfix
+
+[33mcommit 2c93c69a4dba91b912c740a511b0c2f41ce1962c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32msmeu[m[33m)[m
+Merge: bff2e12 a356048
+Author: Stefan Smeu <smeustefan090@gmail.com>
+Date:   Sat Jun 12 15:36:22 2021 +0300
+
+    Merge pull request #23 from Theodorulus/smeu
+    
+    Profile page
+
+[33mcommit 7fcd3fbebab673fd3db5a3d42bbdc38c30abe91f[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Fri Jun 11 14:27:39 2021 +0300
+
+    added pokerHandsWon & pokerHandsPlayed to profile
+
+[33mcommit e70a6c73755a9f4ca4b965d42e76065b737093d4[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Fri Jun 11 13:19:02 2021 +0300
+
+    backend poker logic
+
+[33mcommit a3560487e27b0103b275a54674506bfc375e58df[m[33m ([m[1;31morigin/smeu[m[33m)[m
+Merge: d5e2a0d 56ee463
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Fri Jun 11 13:06:10 2021 +0300
+
+    pulled from main
+
+[33mcommit d5e2a0df1d4ca6a07e44c4f2bd805a6b98c7ceb0[m
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Fri Jun 11 13:01:45 2021 +0300
+
+    added profile page with avatar, inventory and shop
+
+[33mcommit 947613f4c4bb578814aa5137f63ddd2ee5d29a0b[m[33m ([m[1;31morigin/catalin[m[33m, [m[1;32mcalin[m[33m)[m
+Author: Catalin-Zaharia <catalinzaharia0112@gmail.com>
+Date:   Sat May 15 14:20:58 2021 +0300
+
+    roulette2
+
+[33mcommit 16a13cef142b74e1bdbc163da3988dc4145ad9ad[m
+Author: Catalin-Zaharia <catalinzaharia0112@gmail.com>
+Date:   Sat May 15 13:28:59 2021 +0300
+
+    pushed roulette
+    
+    added roulette
+
+[33mcommit 08e4f07a46441a69bcec57ed18371c613ba2944b[m
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Fri May 14 15:06:01 2021 +0300
+
+    a
+
+[33mcommit 2d05c384abec09376158aee04b473c3e8add8d81[m[33m ([m[1;31morigin/calin[m[33m)[m
+Author: cul1n <56848256+cul1n@users.noreply.github.com>
+Date:   Fri May 14 14:57:26 2021 +0300
+
+    Changed layout of the page.
+
+[33mcommit 3753ee22a1571318f3766d6fcb6409756f59c4cf[m
+Merge: 9145c77 9f10927
+Author: cul1n <56848256+cul1n@users.noreply.github.com>
+Date:   Fri May 14 14:28:13 2021 +0300
+
+    Merge branch 'main' into calin
+
+[33mcommit 77b66a7767cd0524c64b00480c76db42e401d5a8[m
+Merge: 9f10927 9145c77
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Fri May 14 08:21:06 2021 +0300
+
+    hotfix
+
+[33mcommit 9145c779624036e1a66be7bce0e3b3a5591d3937[m
+Author: cul1n <56848256+cul1n@users.noreply.github.com>
+Date:   Fri May 14 08:16:11 2021 +0300
+
+    Implemented slots.
+
+[33mcommit 8f10256be66aebfe395ae0e9a4f6b1ca3ccd662a[m[33m ([m[1;31morigin/costi[m[33m)[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Thu May 13 13:36:20 2021 +0300
+
+    fixed index.ejs bug + games authorization
+
+[33mcommit 8be7e73198ec9b23ebddb2a09ab3807cdc2deff8[m
+Author: Theodorulus <theo_tudorache@yahoo.com>
+Date:   Thu May 13 12:57:40 2021 +0300
+
+    fixed login, register routes
+
+[33mcommit 065355b799a1fa2ca0ffbf385362f58e15fc5c05[m
+Merge: aa60d74 dfdd6c8
+Author: Costi Tică <62246435+costi-tica@users.noreply.github.com>
+Date:   Thu May 13 12:43:41 2021 +0300
+
+    Merge pull request #15 from Theodorulus/costi
+    
+    adapted routes to login/register views
+
+[33mcommit dfdd6c882eef2ea4b1df9f8356f1d74098f8ef4c[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Thu May 13 12:43:13 2021 +0300
+
+    adapted routes to login/register views
+
+[33mcommit aa60d74a183479c4ed1a1679b2f70d6b3665b7d8[m
+Author: Theodorulus <theo_tudorache@yahoo.com>
+Date:   Thu May 13 12:36:49 2021 +0300
+
+    added index, login and register page
+
+[33mcommit 79894cd8b688ac2f3b4aec3079a6679ca70621b4[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Tue May 11 23:33:09 2021 +0300
+
+    added socket.io connection
+
+[33mcommit cb1dc73a2658010d0496b6d15157a6a347f2df21[m
+Merge: 2fc57e6 bd299be
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Tue May 11 22:10:23 2021 +0300
+
+    Merge branch 'main' of https://github.com/Theodorulus/CazinoRoial into costi
+
+[33mcommit 2fc57e6362bd7c64435efad7f5e6b75c19d42475[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Tue May 11 22:09:53 2021 +0300
+
+    +
+
+[33mcommit 2984197246b51bd8c1f6125813ca5356de70ad35[m
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Mon May 10 17:11:07 2021 +0300
+
+    hotfix
+
+[33mcommit 70c2c3d8fc197801b4d03f52d1c908056a9d821f[m
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Mon May 10 16:56:06 2021 +0300
+
+    hotfix
+
+[33mcommit bd299be8f871059a73087d191f4dee42db12671f[m
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Mon May 10 16:40:01 2021 +0300
+
+    hotfix
+
+[33mcommit 299a65e220ee35272558dc9eed4f7bfd21ff393c[m
+Merge: 641de2b 7f6f48c
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Mon May 10 16:35:39 2021 +0300
+
+    hotfix
+
+[33mcommit 7f6f48c88dd57aef40107d88cdd7dd61d0e13be5[m
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Mon May 10 16:34:29 2021 +0300
+
+    hotfix
+
+[33mcommit 641de2b61838092eaeda21abc2095ffa256a0daa[m
+Merge: 2af02f9 9a1e04a
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Mon May 10 16:21:37 2021 +0300
+
+    hotfix
+
+[33mcommit 9a1e04adda4acdd6472717b9e02fbbc493f87760[m
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Mon May 10 16:19:10 2021 +0300
+
+    hotfix
+
+[33mcommit 2af02f9b797a964d64dd85369105632e6ec70b12[m
+Merge: 83a64d7 2fec0e3
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Mon May 10 16:14:34 2021 +0300
+
+    games controller router and views
+
+[33mcommit 83a64d7ac3a0801c570a825c6a37049814f29720[m
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Mon May 10 16:05:51 2021 +0300
+
+    game controller router and views
+
+[33mcommit 37120144f5054fe5cf20cb0109164b32ffb7ad43[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Mon May 10 15:59:40 2021 +0300
+
+    added gainRP and loseRP functions
+
+[33mcommit 999ed3cf7eec2cce44a0fc2bd760345780f1427c[m[33m ([m[1;32mcosti[m[33m)[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Sat May 8 14:46:40 2021 +0300
+
+    db+sessions
+
+[33mcommit af2db27d56c7e896f5f414335f0f378ed4c5fb8c[m
+Author: Ştefan Smeu <smeustefan090@gmail.com>
+Date:   Fri May 7 19:16:01 2021 +0300
+
+    user login and signup, .env file contains DB and DBPASSWORD variabels which coresponds to database name and root password. To implemet: client session
+
+[33mcommit 64a218af1000af0b3d834b2e7b76728e806b7411[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Wed Mar 17 14:02:42 2021 +0200
+
+    routing example
+
+[33mcommit 42474a340f70ec3d8d310c1c30572cc1e72c0dad[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Wed Mar 17 13:29:49 2021 +0200
+
+    boilerplate code
+
+[33mcommit e4023b7e4e1430e13edd56c76cb3e00a869806e3[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Mon Mar 15 12:12:51 2021 +0200
+
+    added some empty folders
+
+[33mcommit 869c06dc9e645112b5f530d45823bc216cc9121e[m
+Author: costi-tica <costi13tica@gmail.com>
+Date:   Mon Mar 15 12:03:08 2021 +0200
+
+    project structure
+
+[33mcommit 4c8ac9ca6b5532e4db2de883831c55e67315abf8[m
+Author: Tudorache Theodor <62239922+Theodorulus@users.noreply.github.com>
+Date:   Sat Mar 13 13:56:57 2021 +0200
+
+    Update README.md
+
+[33mcommit b6f8bc5d136b4fea59609fe709d3687ab4e18a1d[m
+Author: Tudorache Theodor <62239922+Theodorulus@users.noreply.github.com>
+Date:   Sat Mar 13 13:56:45 2021 +0200
+
+    Update README.md
+
+[33mcommit cfa767cf2453bad838a029a912e206507631f731[m
+Author: Catalin-Zaharia <62217793+Catalin-Zaharia@users.noreply.github.com>
+Date:   Sat Mar 13 13:33:57 2021 +0200
+
+    Update README.md
+
+[33mcommit 15c9a78d97679518439f21467953e0f12bfccc09[m
+Author: Catalin-Zaharia <62217793+Catalin-Zaharia@users.noreply.github.com>
+Date:   Sat Mar 13 13:26:49 2021 +0200
+
+    Update README.md
+
+[33mcommit ce11a2977004ff28c47d8cf323eb2c932b4709a1[m
+Author: Catalin-Zaharia <62217793+Catalin-Zaharia@users.noreply.github.com>
+Date:   Sat Mar 13 13:25:51 2021 +0200
+
+    Update README.md
+
+[33mcommit 0adba3c6851ef25105e5a38cc23893b25fa080e2[m
+Author: Catalin-Zaharia <62217793+Catalin-Zaharia@users.noreply.github.com>
+Date:   Sat Mar 13 13:25:30 2021 +0200
+
+    Update README.md
+
+[33mcommit c93cbf23a93d1423e17a40b2e770718a138e369d[m
+Author: Catalin-Zaharia <62217793+Catalin-Zaharia@users.noreply.github.com>
+Date:   Sat Mar 13 13:25:10 2021 +0200
+
+    Create README.md
+
+[33mcommit 4876855471daf9acf7e91890ad1b9382cb7ef0ca[m
+Author: Theodorulus <theo_tudorache@yahoo.com>
+Date:   Sat Mar 13 13:22:19 2021 +0200
+
+    Initial commit
