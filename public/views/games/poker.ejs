@@ -38,11 +38,11 @@
 			<button class = "sit2 leavebtn">Părăsește camera</button>
 			-->
 			
-			<div class="startbtn" id="startGame">
+			<div class="startbtn" id="startGame" class="hidden">
 				Incepe jocul
 			</div>
 			
-			<div class="leavebtn">
+			<div class="leavebtn" id="leaveGame">
 				<img src="/img/poker/exit.png">
 			</div>
 			
@@ -187,14 +187,21 @@
 			</div>
 			
 			<div class="play-buttons">
-				<button id="fold"> FOLD </button>
+				<button id="fold" class="hidden"> FOLD </button>
 				<button id="check" class="hidden"> CHECK </button>
-				<button id="call" > CALL </button>
-				<button id="bet"> BET </button>
+				<button id="call" class="hidden" > CALL </button>
+				
+				<button id="bet"  class="hidden"> BET </button>
 				<div id="slider" class="slider-container hidden">
 					<input type="range"  min="1" max="100" value="1" class="slider" id="slider_input"></input>
 				</div>
 				<button id="bet_amount" class="hidden"> 100 RP </button>
+
+				<button id="raise" class="hidden"> RAISE </button>
+				<div id="sliderRaise" class="slider-container hidden">
+					<input type="range"  min="1" max="100" value="1" class="slider" id="slider_input_raise"></input>
+				</div>
+				<button id="raise_amount" class="hidden"> 100 RP </button>
 				
 			</div>
 		</main>

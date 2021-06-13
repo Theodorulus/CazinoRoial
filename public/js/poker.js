@@ -7,7 +7,7 @@ window.onload = function() {
     var myId = 1;
     var raiseOrBet = "bet";
     var smallBlinds = [1, 2, 5, 10, 20, 50, 100, 200, 500]
-	var bets = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 5000, 10000, 50000]
+	var bets = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000]
     var isSmallBlind = false;
     var isBigBlind = false;
     var currentSmallBlind = 0;
@@ -23,11 +23,14 @@ window.onload = function() {
         
         listItems.classList.add("hidden");
         lobbyItems.classList.remove("hidden");
-
-        /* update banner */
-        //TO DO: dupa merge foloseste admin
-        //document.getElementById("banner1").innerHTML = user.username;
+        document.getElementById("startGame").classList.remove("hidden");
     }
+
+    socket.on('getAdminData', data => {
+        //data = userName, rp, inGame
+        document.getElementById("username1").innerHTML = data.userName;
+        document.getElementById("balance1").innnerHTML = data.rp;
+    })
 
     document.getElementById("show_rooms").onclick = function () {
         socket.emit('showPokerRooms');
@@ -96,11 +99,10 @@ window.onload = function() {
             let balanceId = "balance" + i;
 
             let username = document.getElementById(usernameId);
-            username.innerHTML = data.players[i-1];
+            username.innerHTML = data.players[i-1].userName;
             
             let balance = document.getElementById(balanceId);
-            //TO DO: dupa merge adauga rp la profil.
-            //balance.innerHTML = data.players[i-1] + " RP";
+            balance.innerHTML = data.players[i-1].rp + " RP";
 
         }
     });
@@ -112,6 +114,7 @@ window.onload = function() {
     socket.on('wait', data => {
         yourTurn = false;
         yoarActions = [];
+        document.getElementById('pot').innerHTML = data.pot + " RP";
 
         hideButtons();
         
@@ -119,8 +122,11 @@ window.onload = function() {
 
         turnCommonCards(data);
 
-        //  reseteaza culoarea username urilor
-        for (let i = 0; i <= data.players.length; i++) {
+        //  reseteaza culoarea username urilor si bet-urile acestora
+        for (let i = 0; i < data.players.length; i++) {
+            if (data.players[i].inGame == 0) {
+                document.getElementById("pot-player" + (i + 1)).innerHTML = "FOLD";
+            }
             let usernameId = "username" + (i + 1);
             let username = document.getElementById(usernameId);
             username.style.color =  "white";
@@ -137,6 +143,10 @@ window.onload = function() {
     socket.on('play', data => {
         yourTurn = true;
         yourActions = data.actions;
+        currentMaxBet = data.roundTotalBet;
+        myBet = data.myBetInRound;
+        document.getElementById('pot').innerHTML = data.pot + " RP";
+
         displayButtons();
         
         turnOwnedCards(data);
@@ -151,9 +161,7 @@ window.onload = function() {
             else {
                 isSmallBlind = false;
                 isBigBlind = true;
-                currentSmallBlind = data.smallBlind;
-                // UNDEFINED????
-                console.log(currentSmallBlind);
+                currentSmallBlind = data.smallblind;
             }
         }
         else {
@@ -161,13 +169,19 @@ window.onload = function() {
             isBigBlind = false; 
         }
 
-        for (let i = 0; i <= data.players.length; i++) {
+        for (let i = 0; i < data.players.length; i++) {
+            if (data.players[i].inGame == 0) {
+                document.getElementById("pot-player" + (i + 1)).innerHTML = "FOLD";
+            }
             let usernameId = "username" + (i + 1);
             let username = document.getElementById(usernameId);
             username.style.color =  "white";
         }
 
-        // TO DO: marcheaza jucatorul din play
+        // marcheaza jucatorul al carui ii este randul
+        usernameId = "username" + myId;
+        username = document.getElementById(usernameId);
+        username.style.color =  "#309259";
 
         console.log("Este randul tau!")
     });
@@ -242,6 +256,7 @@ window.onload = function() {
         document.getElementById("call").classList.add('hidden');
         document.getElementById("fold").classList.add('hidden');
         document.getElementById("bet").classList.add('hidden');
+        document.getElementById("raise").classList.add('hidden');
         
     }
 
@@ -278,8 +293,11 @@ window.onload = function() {
         }
 
         if (yourActions.includes("raise")) {
-            document.getElementById("bet").classList.remove('hidden');
+            document.getElementById("raise").classList.remove('hidden');
             raiseOrBet = "raise";
+        }
+        else {
+            document.getElementById("raise").classList.add('hidden');
         }
     }
 
@@ -306,7 +324,8 @@ window.onload = function() {
             document.getElementById("bet_amount").innerHTML = rp + " RP";
         }
         else {
-            document.getElementById("bet_amount").innerHTML = this.value.concat(" RP");
+            let rp = bets[this.value];
+            document.getElementById("bet_amount").innerHTML = rp + " RP";
         }
     }
 
@@ -319,18 +338,23 @@ window.onload = function() {
             document.getElementById("slider").classList.remove("hidden");
             document.getElementById("bet_amount").classList.remove("hidden");
         }
-        if (isBigBlind == true) {
+        else if (isBigBlind == true) {
             let bet = currentSmallBlind * 2;
             socket.emit('pokerAction', {name: "bet", value: bet})
+            isBigBlind = false;
         }
         else {
+            document.getElementById("slider_input").min = 0;
+            document.getElementById("slider_input").max = bets.length - 1;
+            document.getElementById("slider_input").value= 0;
+
             document.getElementById("slider").classList.remove("hidden");
             document.getElementById("bet_amount").classList.remove("hidden");
         }
     };
 
     document.getElementById("bet_amount").onclick = function() {
-        let bet = document.getElementById("slider_input").value;
+        let bet = bets[document.getElementById("slider_input").value];
         if (isSmallBlind == true) {
             bet = smallBlinds[document.getElementById("slider_input").value]
         }
@@ -340,13 +364,45 @@ window.onload = function() {
         document.getElementById("bet_amount").classList.add("hidden");
     }
 
-//    document.getElementById("raise").onclick = function () {
-//        socket.emit('pokerAction', {name: "raise", value: 20})
-//    };
 
 
+    document.getElementById("raise_amount").innerHTML=document.getElementById("slider_input_raise").value.concat(" RP");
 
-    
+    document.getElementById("slider_input_raise").value= currentMaxBet - myBet + 1;
 
+
+    document.getElementById("slider_input_raise").oninput = function() {
+        document.getElementById("raise_amount").innerHTML = this.value.concat(" RP");
+    }
+
+    document.getElementById("raise").onclick = function () {
+        document.getElementById("slider_input_raise").min = currentMaxBet - myBet + 1;
+        document.getElementById("slider_input_raise").max = currentMaxBet - myBet + 501;
+        document.getElementById("slider_input_raise").value= currentMaxBet - myBet + 1;
+        
+        document.getElementById("sliderRaise").classList.remove("hidden");
+        document.getElementById("raise_amount").classList.remove("hidden");
+    }
+
+    document.getElementById("raise_amount").onclick = function() {
+        let raise = parseInt(document.getElementById("slider_input_raise").value) + parseInt(myBet);
+        socket.emit('pokerAction', {name: "raise", value: raise})
+        document.getElementById("sliderRaise").classList.add("hidden");
+        document.getElementById("raise_amount").classList.add("hidden");
+    }
+
+    document.getElementById("leaveGame").onclick = function() {
+        window.location.reload();
+    }
+
+
+    socket.on('winner', data => { 
+        hideButtons();
+    });
+
+    socket.on('loser', data => { 
+        hideButtons();
+        
+    });
 
 }
