@@ -595,3 +595,6 @@ body {
   padding: 12px;
   color: rgb(255, 255, 255);
 } 
+.container {
+  width: 100%;
+}
