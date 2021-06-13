@@ -21,28 +21,24 @@
 
         <%- include('../partials/header') %>
         <br>
-		<div id = "lobbyList" class="hidden">
+		<div id = "lobbyList" class="">
 			<button id="create" class="create_join_btn">Creează o nouă cameră</button>
 			<input type="text" class="lobbyList" placeholder="Numele noii camere" maxlength="12" id="roomName" ><br>
 			<button id="show_rooms" class="create_join_btn">Arată camerele existente</button>
 			<ul id="rooms" class="hidden">
-				m<li><div class="room_name">♣ R</div><button id="go" class="joinbtn"> Intră </button ><div class="number_of_players">1/5</div></li>
+                <!-- Exemplu elemente li
+				<li><div class="room_name">♣ R</div><button id="go" class="joinbtn"> Intră </button ><div class="number_of_players">1/5</div></li>
 				<li><div class="room_name">♣ R0</div><button class="joinbtn"> Intră </button><div class="number_of_players">2/5</div></li>
-				<li><div class="room_name">♣ ROO</div><button class="joinbtn"> Intră </button><div class="number_of_players">2/5</div></li>
-				<li><div class="room_name">♣ ROOM 2</div><button class="joinbtn"> Intră </button><div class="number_of_players">4/5</div></li>
-				<li><div class="room_name">♣ ROOM 13</div><button class="joinbtn"> Intră </button><div class="number_of_players">5/5</div></li>
-				<li><div class="room_name">♣ ROOM 2432</div><button class="joinbtn"> Intră </button><div class="number_of_players">4/5</div></li>
-				<li><div class="room_nae">♣ ROOM 1423552</div><button class="joinbtn"> Intră </button><div class="number_of_players">2/5</div></li>
-				<li><div class="room_name">♣ dadadwqwqdqw</div><button class="joinbtn"> Intră </button><div class="number_of_players">1/5</div></li>
+                -->
 			</ul>
 		</div>
 
-        <main id="poker_table" class="">
+        <main id="poker_table" class="hidden">
 			<!--
 			<button class = "sit2 leavebtn">Părăsește camera</button>
 			-->
 			
-			<div class="startbtn">
+			<div class="startbtn" id="startGame">
 				Incepe jocul
 			</div>
 			
@@ -59,7 +55,7 @@
             </div>
 			
 			<div id="pot">
-				5678 RP
+				0 RP
 			</div>
 			
 			<div id="dealer-token" class="token-at-player3">
@@ -81,122 +77,122 @@
 			
 			
 			<div id="cards1">
-				<div id="card1" class=""><img src="/img/poker/cards/2C.png"></div>
-				<div id="card2" class=""><img src="/img/poker/cards/2C.png"></div>
-				<div id="card3" class=""><img src="/img/poker/cards/2C.png"></div>
-				<div id="card4" class=""><img src="/img/poker/cards/2C.png"></div>
-				<div id="card5" class=""><img src="/img/poker/cards/2C.png"></div>
+				<div id="ccard1" class=""></div>
+				<div id="ccard2" class=""></div>
+				<div id="ccard3" class=""></div>
+				<div id="ccard4" class=""></div>
+				<div id="ccard5" class=""></div>
 			</div>
 
 			<div class="sit1 lobby">
 				<div class="images lobby">
 					<img src="/img/avatars/no_avatar.png" class="profile lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby" id="card1">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby" id="card2">
 				</div>
 				<div class="banner lobby">
-					<div class="username">
-						Username
+					<div class="username" id="username1">
+						Empty Sit
 					</div>
-					<div class="balance">
-						300 RP
+					<div class="balance" id="balance1">
+						0 RP
 					</div>
 				</div>
 			</div>
 			
 			<div id="pot-player1">
-				5 RP
+				0 RP
 			</div>
 
 			<div class="sit2 lobby">
 				<div class="images lobby">
 					<img src="/img/avatars/no_avatar.png" class="profile lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby" id="card3">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby" id="card4">
 				</div>
 				<div class="banner lobby">
-					<div class="username">
-						Username
+					<div class="username" id="username2">
+					    Empty Sit
 					</div>
-					<div class="balance">
-						300 RP
+					<div class="balance" id="balance2">
+						0 RP
 					</div>
 				</div>
 			</div>
 				
 			<div id="pot-player2">
-				90 RP
+				0 RP
 			</div>
 
 			<div class="sit3 lobby">
 				<div class="images lobby">
 					<img src="/img/avatars/no_avatar.png" class="profile lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby" id="card5">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby" id="card6">
 				</div>
 				<div class="banner lobby">
-					<div class="username">
-						Username
+					<div class="username" id="username3">
+						Empty Sit
 					</div>
-					<div class="balance">
-						300 RP
+					<div class="balance" id="balance3">
+						0 RP
 					</div>
 				</div>
 			</div>
 			
 			<div id="pot-player3">
-				500 RP
+				0 RP
 			</div>
 
 
 			<div class="sit4 lobby">
 				<div class="images lobby">
 					<img src="/img/avatars/no_avatar.png" class="profile lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby" id="card7">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby" id="card8">
 				</div>
 				<div class="banner lobby">
-					<div class="username">
-						Username
+					<div class="username" id="username4">
+						Empty Sit
 					</div>
-					<div class="balance">
-						300 RP
+					<div class="balance" id="balance4">
+						0 RP
 					</div>
 				</div>
 			</div>
 			
 			<div id="pot-player4">
-				9999 RP
+				0 RP
 			</div>
 
 
 			<div class="sit5 lobby">
 				<div class="images lobby">
 					<img src="/img/avatars/no_avatar.png" class="profile lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card1 lobby">
-					<img src="/img/avatars/deck_5_large.png" class="card2 lobby">
+					<img src="/img/avatars/deck_5_large.png" class="card1 lobby" id="card9">
+					<img src="/img/avatars/deck_5_large.png" class="card2 lobby" id="card10">
 				</div>
 				<div class="banner lobby">
-					<div class="username">
-						Username
+					<div class="username" id="username5">
+						Empty Sit
 					</div>
-					<div class="balance">
-						300 RP
+					<div class="balance" id="balance5">
+						0 RP
 					</div>
 				</div>
 			</div>
 			
 			<div id="pot-player5">
-				99000 RP
+				0 RP
 			</div>
 			
 			<div class="play-buttons">
 				<button id="fold"> FOLD </button>
 				<button id="check" class="hidden"> CHECK </button>
-				<button id="check" > CALL </button>
+				<button id="call" > CALL </button>
 				<button id="bet"> BET </button>
 				<div id="slider" class="slider-container hidden">
-					<input type="range"  min="1" max="10000" value="1" class="slider" id="slider_input"></input>
+					<input type="range"  min="1" max="100" value="1" class="slider" id="slider_input"></input>
 				</div>
 				<button id="bet_amount" class="hidden"> 100 RP </button>
 				
