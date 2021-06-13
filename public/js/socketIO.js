@@ -24,6 +24,14 @@ function loseRP(RP) {
     socket.emit('loseRP', RP);
 }
 
+function getRP(){
+    socket.emit('getRP');
+}
+
+function setRP(RP){
+    socket.emit('setRP', RP);
+}
+
 socket.on('getUpdatedRP', rp => {
     console.log(rp)
 })
@@ -158,6 +166,7 @@ socket.on('getUpdatedRP', rp => {
 //     //         ...,
 //     //     ]
 //     // }
+
 
 //     //daca jocul s-a terminat prin fold sau leave si a ramas un singur jucator in meci
 //     //data:
