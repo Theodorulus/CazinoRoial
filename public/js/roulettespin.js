@@ -1,3 +1,4 @@
+
 var $inner = $('.inner'),
 $spin = $('#spin'),
 $reset = $('#reset'),
@@ -341,6 +342,7 @@ class Player {
 
     updateMoneyBar(){
         document.getElementById("money-bar").innerHTML="RoialPoints: "+this.amount;
+        setRP(this.amount);
     }
 }
 
@@ -418,8 +420,11 @@ $(function() {
         tableAreas[i].coords= coordMultiplier(tableAreas[i].coords, imageRatio);
     }
 });
-
+getRP();
+socket.on('recieveRP', RP =>{
+   player= new Player("player", RP);
+   player.updateMoneyBar();
+})
 var betAmount=10;
-player= new Player("player", 1000);
-player.updateMoneyBar();
+
  

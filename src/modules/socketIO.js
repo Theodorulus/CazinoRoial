@@ -592,6 +592,27 @@ io.on('connection', socket => {
 		loseRPbySession(getSessionId(socket), RP);
 	})
 
+	socket.on('getRP',() =>{
+		getUserData(socket, (user) => {
+			db.query('select RoialPointz from profile where UserId=?', [user.id], (error, result)=>{
+				if (error){
+					console.log(error);
+				}
+				io.to(socket.id).emit('recieveRP',result[0].RoialPointz);
+			})
+		})
+	})
+
+	socket.on('setRP', RP => {
+		getUserData(socket, (user) => {
+			db.query('update profile set RoialPointz = ? where UserId = ?',  [RP, user.id], (error) =>{
+				if (error){
+					console.log(error);
+				}
+			})
+		})
+	})
+
 	//  POKER ---------------------------------------------------------------------------------------------------------
 	socket.on('newPokerRoom', roomName => {
 		if (!roomName || roomName.length  < 1) return;
