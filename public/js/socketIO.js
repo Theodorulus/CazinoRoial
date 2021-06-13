@@ -29,5 +29,12 @@ function loseRP(RP) {
     // console.log('ti au scazut 10 RP')
 }
 
+function getRP(){
+    socket.emit('getRP');
+}
+
+socket.on('recieveRP', RP => {
+    
+}) 
 
 
