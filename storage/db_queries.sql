@@ -31,3 +31,8 @@ delete from sessions;
 select * from sessions;
 select * from users;
 select * from profile;
+
+update profile 
+set RoialPointz = 100;
+
+SELECT u.id, Username, RoialPointz RP FROM users u JOIN profile p ON(u.id = p.UserId) WHERE u.id = 1;
