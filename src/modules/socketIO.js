@@ -46,12 +46,13 @@ class PokerRoom {
 		bet: 'bet',
 		fold: 'fold',
 		call: 'call',
-		raise: 'raise'
+		raise: 'raise',
+		allIn: 'allIn'
 	}
 	static cardValues = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 	static cardSuits = ["spades", "diamonds", "clubs", "hearts"];  //inima neagra, romb, trefla, inima rosie
 	static smallBlinds = [1, 2, 5, 10, 20, 50, 100, 200, 500]
-	static bets = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 5000, 10000, 50000]
+	// static bets = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 5000, 10000, 50000]
 
 	static getEncodedHand(cards){
 		let result = []
@@ -65,7 +66,7 @@ class PokerRoom {
 			s += card.Suit[0]
 			result.push(s)
 		}
-		console.log("RES: ", result)
+		console.log("HAND: ", result)
 		return result;
 	}
 
@@ -120,11 +121,12 @@ class PokerRoom {
 	}
 
 	sendDataBackToPlayers(callback) {
-		var publicPlayersInfo = this.players.map(p => {let info = {userName: p.userName, inGame: p.inGameStatus}; return info})
+		var publicPlayersInfo = this.players.map(p => {let info = {userName: p.userName, inGame: p.inGameStatus, rp: p.rp}; return info})
 		for (let i = 0; i < this.players.length; ++i) {
 			let player = this.players[i]
 
 			let commonData = {
+				dealer: this.dealer, // index in list 'players'
 				round: this.round,
 				players: publicPlayersInfo,
 				rp: player.rp,
@@ -180,7 +182,7 @@ class PokerRoom {
 			this.nextRound()
 			return
 		}
-		while (this.players[t % this.players.length].inGameStatus == PokerPlayer.inGameStatus.out){
+		while (this.players[t % this.players.length].inGameStatus == PokerPlayer.inGameStatus.out || this.players[t % this.players.length].rp == 0){
 			++t;
 			if (this.lastPlayerToBetOrRaise === undefined && t == (this.dealer + 1) % this.players.length){
 				this.nextRound()
@@ -191,12 +193,17 @@ class PokerRoom {
 			this.nextRound()
 			return;
 		}
+
 		this.turn = t;
+
+		if (this.players[this.turn].rp <= this.roundBet - this.playersBetsInRound[this.turn]){
+			this.actions = [PokerRoom.pokerActions.allIn, PokerRoom.pokerActions.fold]
+		}
 	}
 
 	nextValidPosition(pos) {
 		var t = (pos + 1) % this.players.length
-		while (this.players[t % this.players.length].inGameStatus == PokerPlayer.inGameStatus.out){
+		while (this.players[t % this.players.length].inGameStatus == PokerPlayer.inGameStatus.out || this.players[t % this.players.length].rp == 0){
 			++t;
 		}
 		return t
@@ -206,7 +213,7 @@ class PokerRoom {
 		this.players.push(player)
 		for (let player of this.players){
 			let data = {
-				players: this.players.map(player => player.userName)
+				players:  this.players.map(p => {let info = {userName: p.userName, inGame: p.inGameStatus, rp: p.rp}; return info})
 			}
 			this.io.to(connectedUsers.get(player.userId)).emit('someoneJoined', data)
 		}
@@ -219,7 +226,7 @@ class PokerRoom {
 		}
 		this.getDeck()
 		this.shuffleDeck()
-
+		
 		this.status = PokerRoom.roomStatus.playing
 		this.round = PokerRoom.rounds.preflop
 		this.actions = [PokerRoom.pokerActions.bet]
@@ -227,17 +234,31 @@ class PokerRoom {
 		for (let i = 0; i < this.players.length; ++i){
 			this.playersBetsInRound.push(0)
 		}
-
+		
 		for (let player of this.players){
 			player.cards = [this.getRandomCard(), this.getRandomCard()]
 			player.inGameStatus = PokerPlayer.inGameStatus.in
-
+			
 			addPokerHandPlayed(player.userId)
 		}
-
+		
 		this.sendDataBackToPlayers((player, hisTurn) => {
 			if (hisTurn) return { actions: this.actions, info: "smallblind"}
 			else 		 return { turn: this.turn }
+		})
+	}
+
+	check() {
+		this.nextTurn(this.turn)
+
+		if (this.round == PokerRoom.rounds.showdown){
+			this.gameOver()
+			return
+		}
+
+		this.sendDataBackToPlayers((player, hisTurn) => {
+			if (hisTurn) return { actions: this.actions, myCards: player.cards }
+			else    	 return { turn: this.turn, myCards: player.cards }
 		})
 	}
 
@@ -286,7 +307,7 @@ class PokerRoom {
 			return;
 		}
 
-		if (!PokerRoom.bets.includes(betValue)) return;
+		if (isNaN(parseInt(betValue)) || betValue < 1) return;
 
 		this.roundBet = betValue
 		this.lastPlayerToBetOrRaise = this.turn
@@ -304,7 +325,6 @@ class PokerRoom {
 		return;
 	}
 
-
 	call() {
 		this.pot += (this.roundBet - this.playersBetsInRound[this.turn])
 		this.players[this.turn].loseRP(this.roundBet - this.playersBetsInRound[this.turn])
@@ -317,21 +337,7 @@ class PokerRoom {
 			this.gameOver()
 			return;
 		}
-
-		this.sendDataBackToPlayers((player, hisTurn) => {
-			if (hisTurn) return { actions: this.actions, myCards: player.cards }
-			else    	 return { turn: this.turn, myCards: player.cards }
-		})
-	}
-
-	check() {
-		this.nextTurn(this.turn)
-
-		if (this.round == PokerRoom.rounds.showdown){
-			this.gameOver()
-			return
-		}
-
+		
 		this.sendDataBackToPlayers((player, hisTurn) => {
 			if (hisTurn) return { actions: this.actions, myCards: player.cards }
 			else    	 return { turn: this.turn, myCards: player.cards }
@@ -339,7 +345,7 @@ class PokerRoom {
 	}
 
 	raise(betValue) {
-		if (betValue < 2 * this.roundBet) return;
+		if (betValue <= this.roundBet) return;
 
 		this.roundBet = betValue
 		this.pot += (this.roundBet - this.playersBetsInRound[this.turn])
@@ -356,6 +362,26 @@ class PokerRoom {
 			else    	 return { turn: this.turn, myCards: player.cards }
 		})
 	}
+
+	allIn() {
+		this.pot += this.players[this.turn].rp
+		this.players[this.turn].loseRP(this.players[this.turn].rp)
+		this.playersBetsInRound[this.turn] = this.roundBet
+
+		this.actions = [PokerRoom.pokerActions.call, PokerRoom.pokerActions.fold, PokerRoom.pokerActions.raise]
+		this.nextTurn(this.turn)
+		
+		if (this.round == PokerRoom.rounds.showdown) {
+			this.gameOver()
+			return;
+		}
+
+		this.sendDataBackToPlayers((player, hisTurn) => {
+			if (hisTurn) return { actions: this.actions, myCards: player.cards }
+			else    	 return { turn: this.turn, myCards: player.cards }
+		})
+	}
+
 
 	fold() {
 		this.players[this.turn].inGameStatus = PokerPlayer.inGameStatus.out
@@ -437,8 +463,20 @@ class PokerRoom {
 			}
 		}
 
-		this.players = this.players.filter(p =>  activePokerPlayers.get(p.userId) === this)
+		var newPlayersList = []
 
+		for (let player of this.players){
+			if (activePokerPlayers.get(p.userId) !== this) continue
+
+			if (player.rp < 1) {
+				activePokerPlayers.delete(player.userId)
+				continue;
+			}
+
+			newPlayersList.push(player)
+		}
+
+		this.players = newPlayersList
 		this.adminId = this.players[0].userId
 		this.status = PokerRoom.roomStatus.waiting
 		this.deck = undefined
@@ -486,12 +524,16 @@ activePokerPlayers = new Map() // userId: PokerRoom
 connectedUsers = new Map() // userId: socket.id
 
 function getSessionId(socket) {
+	if (socket.handshake.headers.cookie === undefined) return false;
+
 	var raw = cookie.parse(socket.handshake.headers.cookie);
 	return raw['connect.sid'].split(":")[1].split('.')[0];
 }
 
 function getUserData(socket, callback) {
 	var sessionId = getSessionId(socket)
+	if (sessionId === false) return;
+
 	db.query(`SELECT data FROM sessions WHERE session_id = ?`, [sessionId], (error, result) => {
 		if (error) {
 			console.error(error);
@@ -547,20 +589,44 @@ io.on('connection', socket => {
 		gainRPbySession(getSessionId(socket), RP);
 	})
 	socket.on('loseRP', RP => {
-        console.log("Din socket: ", socket.id)
-
 		loseRPbySession(getSessionId(socket), RP);
+	})
+
+	socket.on('getRP',() =>{
+		getUserData(socket, (user) => {
+			db.query('select RoialPointz from profile where UserId=?', [user.id], (error, result)=>{
+				if (error){
+					console.log(error);
+				}
+				io.to(socket.id).emit('recieveRP',result[0].RoialPointz);
+			})
+		})
+	})
+
+	socket.on('setRP', RP => {
+		getUserData(socket, (user) => {
+			db.query('update profile set RoialPointz = ? where UserId = ?',  [RP, user.id], (error) =>{
+				if (error){
+					console.log(error);
+				}
+			})
+		})
 	})
 
 	//  POKER ---------------------------------------------------------------------------------------------------------
 	socket.on('newPokerRoom', roomName => {
 		if (!roomName || roomName.length  < 1) return;
 		getUserData(socket, (user) => {
+			if (activePokerPlayers.get(user.id)) return;
+
+			if (user.rp < 1) return;
+
 			admin = new PokerPlayer(user.id, user.Username, user.rp)
 			pokerRoom = new PokerRoom(io, roomName, admin)
 
 			rooms.push(pokerRoom)
 			activePokerPlayers.set(user.id, pokerRoom)
+			io.to(connectedUsers.get(user.id)).emit("getAdminData", {userName: admin.userName, inGame: admin.inGameStatus, rp: admin.rp})
 		})
 	})
 
@@ -579,10 +645,13 @@ io.on('connection', socket => {
 	socket.on('joinPokerRoom', chosenRoomId => {
 		if (isNaN(parseInt(chosenRoomId))) return;
 		getUserData(socket, (user) => {
+			if (activePokerPlayers.get(user.id)) return;
+
+			if (user.rp < 1) return;
+
 			var room = rooms.find(room => room.roomId == chosenRoomId)
 
 			if (!room) return;
-
 			
 			if (room.status == PokerRoom.roomStatus.playing){
 				io.to(connectedUsers.get(user.id)).emit('sorryGameStarted')
@@ -614,11 +683,11 @@ io.on('connection', socket => {
 		})
 	})
 	
-	socket.on('pokerAction', action => { // {name: check, value: -1}
+	socket.on('pokerAction', action => { // {name: 'check', value: -1}
 		getUserData(socket, user => {
 			const room = activePokerPlayers.get(user.id)
 
-			if (room.players[room.turn].userId == user.id){
+			if (room?.players[room.turn].userId == user.id){
 				console.log("Actiunea curenta: ", action)
 
 				if (!room.actions.includes(action.name)) return;
@@ -649,6 +718,11 @@ io.on('connection', socket => {
 				if (action.name == PokerRoom.pokerActions.fold) {
 					room.fold()
 				}
+
+				//ALLIN
+				if (action.name == PokerRoom.pokerActions.allIn) {
+					room.allIn()
+				}
 			}
 		})
 	})
@@ -656,6 +730,8 @@ io.on('connection', socket => {
 	socket.on('leavePokerRoom', () => {
 		getUserData(socket, (user) => {
 			const room = activePokerPlayers.get(user.id)
+
+			if (!room) return;
 			
 			room.leave(user.id)
 			if (room.players.length == 0) {
