@@ -74,7 +74,6 @@ const login_post = async function(req,res){
 const register_post = async function(req,res){
     const password = req.body.password;
 	const confirm_pass = req.body.confirm_pass;
-	console.log(password, confirm_pass)
 
 	if (password !== confirm_pass){
 		return res.render("accounts/register", {
