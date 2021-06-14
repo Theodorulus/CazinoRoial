@@ -16,10 +16,13 @@ window.onload=function()
 	}
 	
 	document.getElementById("bet").onclick = function() {
-		console.log("Salut robi");
+		//console.log("Salut robi");
 		document.getElementById("slider").classList.remove("hidden");
 		document.getElementById("bet_amount").classList.remove("hidden");
 	}
 	
+	document.getElementById("send_message").onclick = function (e) {
+		e.preventDefault();
+	}
 	
 }
