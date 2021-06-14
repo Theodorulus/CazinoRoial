@@ -211,17 +211,17 @@ class PokerRoom {
 
 	join(player) {
 		this.players.push(player)
+		let data = {
+			players:  this.players.map(p => {let info = {userName: p.userName, inGame: p.inGameStatus, rp: p.rp}; return info})
+		}
 		for (let player of this.players){
-			let data = {
-				players:  this.players.map(p => {let info = {userName: p.userName, inGame: p.inGameStatus, rp: p.rp}; return info})
-			}
 			this.io.to(connectedUsers.get(player.userId)).emit('someoneJoined', data)
 		}
 	}
 
 	startGame() {
 		if (this.players.length < 2) {
-			io.to(connectedUsers.get(this.adminId).emit('notEnoughPlayers'))
+			this.io.to(connectedUsers.get(this.adminId).emit('notEnoughPlayers'))
 			return;
 		}
 		this.getDeck()
@@ -466,7 +466,7 @@ class PokerRoom {
 		var newPlayersList = []
 
 		for (let player of this.players){
-			if (activePokerPlayers.get(p.userId) !== this) continue
+			if (activePokerPlayers.get(player.userId) !== this) continue
 
 			if (player.rp < 1) {
 				activePokerPlayers.delete(player.userId)
@@ -515,6 +515,13 @@ class PokerRoom {
 				break
 			}
 			++i;
+		}
+	}
+
+	sendMessage(senderId, message) {
+		var sender = this.players.find(p => p.userId == senderId)
+		for (let player of this.players.filter(p => p.userId != senderId)){
+			this.io.to(connectedUsers.get(player.userId)).emit('receivePokerMessage', {sender: sender.userName, date: new Date(), message: message})
 		}
 	}
 }
@@ -580,7 +587,7 @@ function getRandomInt(max) {
 function activateSockets(io){
 
 io.on('connection', socket => {
-    console.log("Din al doilea connect: ", socket.id)
+    console.log("Connected: ", socket.id)
     getUserData(socket, (user) => {
         connectedUsers.set(user.id, socket.id)
     })
@@ -739,7 +746,26 @@ io.on('connection', socket => {
 			}
 		})
 	})
+
+	socket.on('sendPokerMessage', message => {
+		getUserData(socket, (user) => {
+			const room = activePokerPlayers.get(user.id)
+
+			if (!room) return;
+
+			if (message.length == 0) return;
+
+			room.sendMessage(user.id, message)
+		})
+	})
 //  END POKER ---------------------------------------------------------------------------------------------------------
+
+	// Global chat
+	socket.on('sendGlobalMessage', message => {
+		getUserData(socket, (user) => {
+			socket.broadcast.emit('receiveGlobalMessage', {sender: user.Username, date: new Date(), message: message})
+		})
+	})
 
     socket.on('disconnect', function() {
         console.log('Got disconnected: ', socket.id);
