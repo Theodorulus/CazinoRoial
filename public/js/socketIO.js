@@ -2,21 +2,6 @@ const socket = io('http://localhost:3000');
 
 socket.on('connection')
 
-// socket.on('message', data => {
-//     console.log(data)
-// })
-
-/*
-document.querySelector("#btn1").onclick = () => {
-    var input = 5;
-    gainRP(input);
-}
-
-document.querySelector("#btn2").onclick = () => {
-    var input = 10;
-    loseRP(input);
-}
-*/
 function gainRP(RP) {
     socket.emit('gainRP', RP);
 }
@@ -32,8 +17,31 @@ function setRP(RP){
     socket.emit('setRP', RP);
 }
 
-socket.on('getUpdatedRP', rp => {
-    console.log(rp)
+
+//CHATS
+
+//poker chat
+function sendPokerMessage(message){
+    socket.emit('sendPokerMessage', message)
+}
+
+socket.on('receivePokerMessage', data => {
+    console.log(data)
+    // data = {
+    //     sender: *name*,
+    //     date: date,
+    //     message: *mesaj*
+    // }
+})
+
+//global chat
+function sendGlobalMessage(message) {
+    socket.emit('sendGlobalMessage', message)
+}
+
+socket.on('receiveGlobalMessage', data => {
+    console.log(data)
+    // do smth with data
 })
 
 // //-----------------------POKER CHANNELS--------------------------
