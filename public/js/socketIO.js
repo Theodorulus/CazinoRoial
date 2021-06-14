@@ -24,6 +24,18 @@ function loseRP(RP) {
     socket.emit('loseRP', RP);
 }
 
+function getRP(){
+    socket.emit('getRP');
+}
+
+function setRP(RP){
+    socket.emit('setRP', RP);
+}
+
+socket.on('getUpdatedRP', rp => {
+    console.log(rp)
+})
+
 // //-----------------------POKER CHANNELS--------------------------
 
 // // cerere de a crea un room nou cu tine ca admin
@@ -155,6 +167,7 @@ function loseRP(RP) {
 //     //     ]
 //     // }
 
+
 //     //daca jocul s-a terminat prin fold sau leave si a ramas un singur jucator in meci
 //     //data:
 //     // {
@@ -175,10 +188,15 @@ socket.on('play', data => {
 socket.on('wait', data => {
     console.log("Asteapta:",data)
 })
+
 socket.on('someoneJoined', data => {
     console.log("Someone joined:",data)
 })
 socket.on('getPokerRooms', data => {
     console.log("Rooms:",data)
 })
+socket.on('getAdminData', data => {
+    //data = userName, rp, inGame 
+})
+
 

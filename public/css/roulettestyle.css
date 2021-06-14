@@ -172,10 +172,10 @@ body {
   border-top-color: red;
 }
 .number:nth-child(1) {
-  border-top-color: green;
+  border-top-color: rgb(6,118,75);
 }
 .number:nth-child(20) {
-  border-top-color: green;
+  border-top-color: rgb(6,118,75);
 }
 .pit {
   color: #fff;
@@ -419,10 +419,10 @@ body {
   left: 25%;
 }
 .btn {
-  background: green;
+  background: rgb(6,118,75);
   border: 1px solid #000000;
-  border-top-color: #00b300;
-  border-left-color: #00b300;
+  border-top-color: rgb(6,118,75);
+  border-left-color: rgb(6,118,75);
   padding: 0;
   margin: 0;
   display: inline-block;
@@ -440,10 +440,10 @@ body {
   white-space: nowrap;
 }
 .btn.btn-reset {
-  background: darkgreen;
+  background: rgb(6,118,75);
   border: 1px solid #000000;
-  border-top-color: #009700;
-  border-left-color: #009700;
+  border-top-color: rgb(6,118,75);
+  border-left-color: rgb(6,118,75);
 }
 .btn.disabled {
   opacity: 0.2;
@@ -501,7 +501,7 @@ body {
   padding-top: 36px;
 }
 .data .result {
-  background-color: green;
+  background-color: rgb(6,118,75);
   color: white;
   transform: rotateY(180deg);
   align-items: center;
@@ -529,7 +529,7 @@ body {
   display: flex;
   margin: 1px;
   padding: 12px;
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 .previous-result:first-child {
   animation: flipin 0.48s ease-out;
@@ -538,13 +538,16 @@ body {
   flex: 1;
 }
 .color-green {
-  background-color: green;
+  background-color: rgb(6,118,75);
 }
 .color-black {
   background-color: black;
 }
 .color-red {
   background-color: red;
+}
+.color-white{
+  background-color: white;
 }
 .visuallyhidden {
   position: absolute;
@@ -567,11 +570,31 @@ body {
 body {
   background-color: lightblue;
 }
-.betTable{
-  height: 50%;
-  width: 50%;
+.table-image{
+  height: 100%;
+  width: 100%;
 }
 .container{
   display: flex;
   justify-content: space-evenly;
+  align-items: flex-start;
+}
+.bettingTable{
+  width: 50%;
+  display: flex;
+  flex-direction:column;
+}
+.betting-queue{
+  margin: 24px 12px;
+}
+.previous-bets{
+  max-width: 100%;
+}
+.money-bar{
+  text-align: center;
+  padding: 12px;
+  color: rgb(255, 255, 255);
+} 
+.container {
+  width: 100%;
 }

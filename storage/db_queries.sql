@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS profile(
     Phone VARCHAR(20),
     Birthdate DATE,
     UserId INT NOT NULL UNIQUE,
+	PokerHandsWon INT DEFAULT 0,
+    PokerHandsPlayed INT DEFAULT 0,
     CONSTRAINT profile_id_pk PRIMARY KEY(id),
 	CONSTRAINT profile_userid_fk FOREIGN KEY(userId) REFERENCES users(id) ON DELETE CASCADE
 );
