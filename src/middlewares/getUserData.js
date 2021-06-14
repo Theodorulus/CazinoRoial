@@ -17,7 +17,6 @@ function getUserData(req, res, next){
             pokerHandsWon: resultUser[0].PokerHandsWon,
             pokerHandsPlayed: resultUser[0].PokerHandsPlayed
         }
-        console.log(resultUser[0])
         next()
         return
     })
