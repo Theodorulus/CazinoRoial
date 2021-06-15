@@ -36,6 +36,11 @@ jobs:
         with:
           node-version: 12
       - run: sudo /etc/init.d/mysql start
+      - run: sudo /usr/sbin/mysqld --skip-grant-tables --skip-networking &
+      - run: mysql -u root
+      - run: FLUSH PRIVILEGES;
+      - run: ALTER USER 'root'@'localhost' IDENTIFIED BY 'Parola123!';
+      - run: quit
       - run: |
           mysql --version
           sudo apt-get install -y mysql-client
