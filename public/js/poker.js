@@ -1,31 +1,3 @@
-
-window.onload=function()
-{
-	document.getElementById("show_rooms").onclick = function() {
-		document.getElementById("rooms").classList.remove("hidden")
-	};
-	
-	document.getElementById("go").onclick = function() {
-		document.getElementById("lobbyList").classList.add("hidden")
-		document.getElementById("poker_table").classList.remove("hidden")
-	};
-	
-	document.getElementById("bet_amount").innerHTML=document.getElementById("slider_input").value.concat(" RP");
-	
-	document.getElementById("slider_input").oninput = function() {
-		document.getElementById("bet_amount").innerHTML = this.value.concat(" RP");
-	}
-	
-	document.getElementById("bet").onclick = function() {
-		//console.log("Salut robi");
-		document.getElementById("slider").classList.remove("hidden");
-		document.getElementById("bet_amount").classList.remove("hidden");
-	}
-	
-	document.getElementById("send_message").onclick = function (e) {
-		e.preventDefault();
-	}
-	
 window.onload = function() {
     var currentMaxBet = 0;
     var myBet = 0;
@@ -233,7 +205,9 @@ window.onload = function() {
         }
 
         lastPot = data.pot;
-        lastRound = data.round;
+        lastRound = data.round; 
+
+        showAvatars(data);
 
         hideButtons();
         
@@ -267,8 +241,10 @@ window.onload = function() {
         currentMaxBet = data.roundTotalBet;
         myBet = data.myBetInRound;
         myRp = data.rp;
+        console.log(data)
 
         document.getElementById('pot').innerHTML = data.pot + " RP";
+
 
         // hide cards and reset banners
         if (lastRound == "river" && data.round == "preflop") {
@@ -323,6 +299,8 @@ window.onload = function() {
             }
         }
 
+        showAvatars(data);
+
         displayButtons();
         
         turnOwnedCards(data);
@@ -364,6 +342,58 @@ window.onload = function() {
 
         console.log("Este randul tau!")
     });
+
+
+    function showAvatars(data) {
+        let j = 0;
+        for (let i = 0; i < 5; i++) {
+            let container  = document.getElementById('avatar' + (i+1));
+            container.innerHTML = "";
+            if(playersBets[i] != null) {
+                if (data.players[j].items.length == 0) {
+                    let avatarDefault = document.createElement('img');
+                    avatarDefault.src = "/img/avatars/no_avatar.png";
+                    avatarDefault.classList.add("image1nohat");
+                    container.appendChild(avatarDefault);
+                }
+                else {
+                    if (data.players[j].items.length == 1 && data.players[j].items[0].category == 'avatar') {
+                        let avatar = document.createElement('img');
+                        avatar.src = "/img/items/avatars/" + data.players[j].items[0].name;
+                        avatar.classList.add("image1nohat");
+                        container.appendChild(avatar);
+                    }
+                    else if (data.players[j].items.length == 2) {
+                        let avatar = document.createElement('img');
+                        let hat = document.createElement('img');
+                        if(data.players[j].items[0].category == 'avatar'){
+                            avatar.src = "/img/items/avatars/" + data.players[j].items[0].name;
+                            avatar.classList.add("image1");
+                            hat.src = "/img/items/hats/" + data.players[j].items[1].name;
+                            hat.classList.add("image2");
+                        }
+                        else {
+                            avatar.src = "/img/items/avatars/" + data.players[j].items[1].name;
+                            avatar.classList.add("image1");
+                            hat.src = "/img/items/hats/" + data.players[j].items[0].name;
+                            hat.classList.add("image2");
+                        }
+                        container.appendChild(hat);
+                        container.appendChild(avatar);
+                    }
+
+                }
+
+                j++;
+            }
+            else {
+                let img = document.createElement('img');
+                img.src = "/img/avatars/no_avatar.png";
+                img.classList.add("image1nohat");
+                container.appendChild(img);
+            }
+        }
+    }   
 
 
     function turnOwnedCards(data) {
