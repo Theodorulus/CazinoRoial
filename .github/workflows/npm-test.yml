@@ -7,8 +7,21 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: windows-latest
+    services:
+      mysql:
+          image: mysql:5.7
+          env:
+            PORT: 3000
+            DBPORT: 3306
+            DBHOST: localhost
+            DBUSER: root
+            DBNAME: cazinoroial
+            DBPASSWORD: Parola123!
+            SESSIONSECRET: SessionSecret
+          ports:
+              - 3306
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
