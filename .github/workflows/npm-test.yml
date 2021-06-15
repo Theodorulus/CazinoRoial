@@ -15,7 +15,7 @@ jobs:
           env:
             PORT: 3000
             DBPORT: 3306
-            DBHOST: localhost
+            DBHOST: 127.0.0.1
             DBUSER: root
             DBNAME: cazinoroial
             DBPASSWORD: Parola123!
@@ -36,7 +36,9 @@ jobs:
         with:
           node-version: 12
       - run: sudo /etc/init.d/mysql start
-      - run:  mysql -e 'CREATE DATABASE ${{ env.DBNAME }};' -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }}
+      - run: mysql -e 'GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'; FLUSH PRIVILEGES;'
+      - run: mysql -e 'CREATE DATABASE ${{ env.DBNAME }};' -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }}
+      - run: quit
       - run: sudo npm config set user 0
       - run: sudo npm config set unsafe-perm true
       - run: rm -Rf node_modules
