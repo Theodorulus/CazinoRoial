@@ -7,6 +7,9 @@ Backlog: https://github.com/Theodorulus/CazinoRoial/projects/1
 
 Online Casino made for those who are eager to lose virtual money.
 
+## App demo
+
+TBC
 
 ## User Stories
 1. As a professional poker player, I want to have statistics on the hands played
@@ -32,8 +35,16 @@ Online Casino made for those who are eager to lose virtual money.
 
 ## Bug reporting
 
-1. When using socket.io, if the session suddenly expired, the socket API tries to maintain the connection by querying the database with an undefined session id, resulting in the server going down. Solution: Checking if the cookie object in the request header, includes the sessionId property. Info: (https://github.com/Theodorulus/CazinoRoial/issues/26)
+1. When using socket.io, if the session suddenly expired, the socket API tries to maintain the connection by querying the database with an undefined session id, resulting in the server going down. Solution: Checking if the cookie object in the request header, includes the sessionId property. Info: (https://github.com/Theodorulus/CazinoRoial/issues/26 "link")
 
-2. After some minor files modifications, some parts of the games controller stopped working properly. Solution: Changed the paths to the modified files. Info: (https://github.com/Theodorulus/CazinoRoial/issues/24)
+2. After some minor files modifications, some parts of the games controller stopped working properly. Solution: Changed the paths to the modified files. Info: (https://github.com/Theodorulus/CazinoRoial/issues/24 "link")
 
+
+## Build tool
+
+TBC
+
+## Unit tests
+
+TBC
 
