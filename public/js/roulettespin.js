@@ -341,7 +341,8 @@ class Player {
     }
 
     updateMoneyBar(){
-        document.getElementById("money-bar").innerHTML="RoialPoints: "+this.amount;
+        document.getElementById("money-bar").innerHTML="RoialPointz: "+this.amount;
+        document.getElementById("userRP").innerHTML="RoialPointz: "+this.amount;
         setRP(this.amount);
     }
 }
@@ -399,7 +400,6 @@ function changeBetAmount(){
         button.innerHTML = 'Bet Amount: 10';
         betAmount=10;
     }
-    console.log(betAmount);
 }
 
 function coordMultiplier(string, multiplier){
@@ -414,13 +414,14 @@ function coordMultiplier(string, multiplier){
 
 $(function() {
     $('.map').maphilight();
-    let imageRatio = parseInt(document.getElementsByClassName('map')[0].style.width,10) /1148; //1148=original image width
+    let imageRatio = parseInt(document.getElementsByClassName('map')[0].clientWidth, 10) /1148; //1148=original image width
     let tableAreas = document.getElementById('table-areas').children;
     for (let i=0; i< tableAreas.length; i++){
         tableAreas[i].coords= coordMultiplier(tableAreas[i].coords, imageRatio);
     }
 });
 getRP();
+player = undefined
 socket.on('recieveRP', RP =>{
    player= new Player("player", RP);
    player.updateMoneyBar();
