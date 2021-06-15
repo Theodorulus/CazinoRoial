@@ -31,6 +31,17 @@ jobs:
       DBPASSWORD: Parola123!
       SESSIONSECRET: SessionSecret
     steps:
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 3306 
+          container port: 3306
+          character set server: 'utf8' 
+          collation server: 'utf8_general_ci' 
+          mysql version: '8.0' 
+          mysql database: ${{ env.DBNAME}} 
+          mysql root password: ${{ env.DBPASSWORD }} 
+          mysql user: ${{ env.DBUSER } 
+          mysql password: ${{ env.DBPASSWORD }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
