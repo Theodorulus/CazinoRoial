@@ -31,24 +31,13 @@ jobs:
       DBPASSWORD: Parola123!
       SESSIONSECRET: SessionSecret
     steps:
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          host port: 3306 
-          container port: 3306
-          character set server: 'utf8' 
-          collation server: 'utf8_general_ci' 
-          mysql version: '8.0' 
-          mysql database: ${{ env.DBNAME}} 
-          mysql root password: ${{ env.DBPASSWORD }} 
-          mysql user: ${{ env.DBUSER }}
-          mysql password: ${{ env.DBPASSWORD }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 12
       - run: sudo /etc/init.d/mysql start
-      - run: mysql -e 'GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'; FLUSH PRIVILEGES;' -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }}
-      - run: mysql -e 'CREATE DATABASE ${{ env.DBNAME }};' -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }}
+      - run: mysql -h 127.0.0.1 --port 3306 -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }} -e 'GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'; FLUSH PRIVILEGES;' 
+      - run: mysql -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }} -e 'CREATE DATABASE ${{ env.DBNAME }};' 
       - run: quit
       - run: sudo npm config set user 0
       - run: sudo npm config set unsafe-perm true
