@@ -21,20 +21,22 @@
         <%- include('../partials/header') %>
         
         <main>
-            <div class="container">
-                <div class="machine">
-                    <div class="machine1">
-                        <div class="half-circle"></div>
-                        <div class="baseLightBulb"></div>
-                        <div class="upper"><div class="credits" id="credits"><%= user.rp %></div></div>
-                        <div class="trapazoid1"></div>
-                        <div class="middle">
-                            <div class="screen-wrapper">
-                                <div class="screen">
-                                    <div class="chamber-wrapper">
-                                    <div class="chamber"><img src="/img/slots/9.png" id="chamber1"></div>
-                                    <div class="chamber"><img src="/img/slots/9.png" id="chamber2"></div>
-                                    <div class="chamber"><img src="/img/slots/9.png" id="chamber3"></div>
+            <div class="center">
+                <div class="container">
+                    <div class="machine">
+                        <div class="machine1">
+                            <div class="half-circle"></div>
+                            <div class="baseLightBulb"></div>
+                            <div class="upper"><div class="credits" id="credits"><%= user.rp %></div></div>
+                            <div class="trapazoid1"></div>
+                            <div class="middle">
+                                <div class="screen-wrapper">
+                                    <div class="screen">
+                                        <div class="chamber-wrapper">
+                                        <div class="chamber"><img src="/img/slots/9.png" id="chamber1"></div>
+                                        <div class="chamber"><img src="/img/slots/9.png" id="chamber2"></div>
+                                        <div class="chamber"><img src="/img/slots/9.png" id="chamber3"></div>
+                                        </div>
                                     </div>
                                 </div>
                             <div class="lever">
@@ -64,11 +66,9 @@
                 </div>
 
             </div>
-            <br>
-            <button id="flip">Info</button>
         </main>
         <br>
-        <button id="flip">Info</button>
+        <button id="flip" class="play">Info</button>
         <%- include('../partials/footer') %>
         
     </body>

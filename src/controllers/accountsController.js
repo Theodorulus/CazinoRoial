@@ -124,6 +124,33 @@ const register_post = async function(req,res){
 	}
 }
 
+
+
+function getItems(userId) {
+	db.query('SELECT * FROM inuse WHERE UserId = ?', userId, async function (error, results, fields) {
+     
+		if (error) {
+			console.log(error)
+			return error;
+		}
+
+		for (result of results){
+			if(result.category == "hat")
+				itemsInUse[0] = [result.name, result.category]
+			if(result.category == "avatar")
+				itemsInUse[1] =( [result.name, result.category])
+		}
+
+		// Returneaza o lista unde primul indice este numele item ului si al doilea este categoria (hat si avatar)
+		return itemsInUse;
+
+
+	});
+}
+
+
+
+
 const profile = (req, res) => {
 
 	let avatars = fs.readdirSync("./public/img/items/avatars");
