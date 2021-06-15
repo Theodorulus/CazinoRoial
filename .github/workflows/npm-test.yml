@@ -32,6 +32,5 @@ jobs:
       - run: sudo npm config set unsafe-perm true
       - run: rm -Rf node_modules
       - run: npm install
-      - run: mysqladmin -u root -p
       - run: mysql -h localhost -u root -p
       - run: npm test
