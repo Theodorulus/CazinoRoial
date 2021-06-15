@@ -33,5 +33,5 @@ jobs:
       - run: rm -Rf node_modules
       - run: npm install
       - run: mysqladmin -u root -p 'Parola123!'
-      - run: mysql -h localhost -u root -p 'Parola123!'
+      - run: mysql -h localhost -u root -p
       - run: npm test
