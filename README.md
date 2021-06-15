@@ -35,9 +35,9 @@ TBC
 
 ## Bug reporting
 
-1. When using socket.io, if the session suddenly expired, the socket API tries to maintain the connection by querying the database with an undefined session id, resulting in the server going down. Solution: Checking if the cookie object in the request header, includes the sessionId property. Info: (https://github.com/Theodorulus/CazinoRoial/issues/26 "link")
+1. When using socket.io, if the session suddenly expired, the socket API tries to maintain the connection by querying the database with an undefined session id, resulting in the server going down. Solution: Checking if the cookie object in the request header, includes the sessionId property. Info: (https://github.com/Theodorulus/CazinoRoial/issues/26)
 
-2. After some minor files modifications, some parts of the games controller stopped working properly. Solution: Changed the paths to the modified files. Info: (https://github.com/Theodorulus/CazinoRoial/issues/24 "link")
+2. After some minor files modifications, some parts of the games controller stopped working properly. Solution: Changed the paths to the modified files. Info: (https://github.com/Theodorulus/CazinoRoial/issues/24)
 
 
 ## Build tool
