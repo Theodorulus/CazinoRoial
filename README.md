@@ -1,6 +1,10 @@
 # CazinoRoial
 Aplicatie Web pentru proiect MDS.
 
+## Team members
+
+TBC
+
 Backlog: https://github.com/Theodorulus/CazinoRoial/projects/1
 
 ## App description
@@ -39,12 +43,22 @@ TBC
 
 2. After some minor files modifications, some parts of the games controller stopped working properly. Solution: Changed the paths to the modified files. Info: (https://github.com/Theodorulus/CazinoRoial/issues/24)
 
+## Design Patterns
+
+TBC
+
+## Refactoring
+
+TBC
 
 ## Build tool
 
-TBC
+The app is using npm with custom scripts as a pseudo build tool.
 
 ## Unit tests
 
-TBC
+The unit tests are divided in 2 parts, one for backend, and one for frontend functions.
+  - for backend there are tests for: login, register, get and post requests
+  - for frontend there are tests for the blackjack functions: getHandValue(), winCondition(), shuffleArray() and getRandomDeck()
+The frontend ones are tested on each push and pull request with github actions: https://github.com/Theodorulus/CazinoRoial/actions
 
