@@ -93,14 +93,12 @@
         });
     }
 
-    
+    function playRound(bet=10){
+        document.getElementById("newRound").style.display="none";
 
-    function playRound(bet=1){
-        
         function dealCard(to, from = deck){
             to.push(from.pop());
         }
-        roundEndFlag=0;
         function endRound(){
             win_cond = winCondition(playerCards, dealerCards)
             payout = bet * win_cond;
@@ -139,21 +137,84 @@
             player_value.innerHTML=getHandValue(playerCards)
             console.log("player= ", getHandValue(playerCards));
             console.log("dealer= ", getHandValue(dealerCards));
+
+            if (playerSplitCards.length >0){
+                payout = bet * winCondition(playerSplitCards, dealerCards);
+                console.log('payoutSplit=', payout);
+                roialpointz+=payout;
+            }
+
+            roundEndFlag=1;
+            document.getElementById("newRound").style.display="initial";
+            document.getElementById("doubleDown").style.display="none";
         }
+
+        function hit(cards) {
+            if (getHandValue(cards) < 21 && roundEndFlag==0){
+                dealCard(cards);
+                showValues();
+                if (getHandValue(cards) > 21){
+                    if (splitToggle) splitToggle=false;
+                    else endRound();
+                }
+            }
+        }
+
+        function showValues(){
+            console.log("player= ", getHandValue(playerCards), playerCards);
+
+            if (playerSplitCards.length > 0)
+            console.log("playerSplit= ", getHandValue(playerSplitCards), playerSplitCards);
+
+            console.log("dealer= ", getHandValue(dealerCards), dealerCards);
+        }
+
+        roundEndFlag=0;
+
         const deck = getRandomDeck(); // new deck every round so they can't be counted 
         const dealerCards=[];
         const playerCards=[];
+        const playerSplitCards = [];
 
         dealCard(playerCards);
         dealCard(dealerCards);
         dealCard(playerCards);
+
         showValues();
         showCardsOnTable(playerCards, dealerCards);
          //console.log(playerCards);
          //console.log(dealerCards);
          
 
-        
+        if (playerCards[0].rank == playerCards[1].rank){
+            document.getElementById("split").style.display="initial";
+        }
+        splitToggle=false // false - control on main hand, true- control on split hand
+        document.getElementById("split").onclick= function () {
+            splitToggle=true
+            document.getElementById("split").style.display="none";
+
+            dealCard(playerSplitCards, playerCards);
+            dealCard(playerCards);
+            dealCard(playerSplitCards);
+
+            showValues();
+        }
+
+        document.getElementById("doubleDown").onclick= function () {
+            bet*=2;
+            dealCard(playerCards);
+            if (getHandValue(playerCards) < 22){
+                while (getHandValue(dealerCards) < 17){ //dealer turn
+                    dealCard(dealerCards);
+                    showValues()
+                }
+            }
+            endRound();
+            document.getElementById("doubleDown").style.display="none";
+            document.getElementById("split").style.display="none";
+        };
+
         document.getElementById("hit").onclick = function() {
             if (getHandValue(playerCards) < 21 && roundEndFlag==0){
                 dealCard(playerCards);
@@ -161,7 +222,12 @@
                 showCardsOnTable(playerCards, dealerCards);
                 if (getHandValue(playerCards) > 21)
                     endRound();
+            if (splitToggle ==false){
+            document.getElementById("split").style.display="none";
+            hit(playerCards)
             }
+            else
+            hit(playerSplitCards)
         };
 
 
@@ -171,8 +237,18 @@
                     dealCard(dealerCards);
                     showValues();
                     showCardsOnTable(playerCards, dealerCards);
+            if (splitToggle == true){
+                splitToggle = false
+            }
+            else{
+                if (roundEndFlag==0){
+                    document.getElementById("split").style.display="none";
+                    while (getHandValue(dealerCards) < 17){ //dealer turn
+                        dealCard(dealerCards);
+                        showValues()
+                    }
+                    endRound();    
                 }
-                endRound();    
             }
         };
         
@@ -237,6 +313,10 @@ window.onload=function(){
         window.location.reload();
     }
 
+    document.getElementById("doubleDown").style.display="none";
+    document.getElementById("split").style.display="none";
+    document.getElementById("newRound").onclick=function(){
+    playRound();
+    document.getElementById("doubleDown").style.display="initial";
+    }
 };
-
-
