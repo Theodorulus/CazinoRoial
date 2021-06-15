@@ -26,7 +26,7 @@ function sendPokerMessage(message){
 }
 
 socket.on('receivePokerMessage', data => {
-    console.log(data)
+    //console.log(data)
     // data = {
     //     sender: *name*,
     //     date: date,
@@ -40,7 +40,7 @@ function sendGlobalMessage(message) {
 }
 
 socket.on('receiveGlobalMessage', data => {
-    console.log(data)
+    //console.log(data)
     // do smth with data
 })
 
@@ -196,10 +196,15 @@ socket.on('play', data => {
 socket.on('wait', data => {
     console.log("Asteapta:",data)
 })
+
 socket.on('someoneJoined', data => {
     console.log("Someone joined:",data)
 })
 socket.on('getPokerRooms', data => {
     console.log("Rooms:",data)
 })
+socket.on('getAdminData', data => {
+    //data = userName, rp, inGame 
+})
+
 

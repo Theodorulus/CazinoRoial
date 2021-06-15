@@ -545,6 +545,9 @@ function getUserData(socket, callback) {
 		if (error) {
 			console.error(error);
 		}
+		
+		if(!result[0]) return;
+		
 
 		var userId = JSON.parse(result[0].data).userLoggedIn;
 
@@ -694,7 +697,7 @@ io.on('connection', socket => {
 		getUserData(socket, user => {
 			const room = activePokerPlayers.get(user.id)
 
-			if (room?.players[room.turn].userId == user.id){
+			if (room.players[room.turn].userId == user.id){
 				console.log("Actiunea curenta: ", action)
 
 				if (!room.actions.includes(action.name)) return;

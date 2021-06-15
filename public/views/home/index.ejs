@@ -11,10 +11,178 @@
 		<link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico"/>
 		<link href="../../css/layout.css" rel="stylesheet" type="text/css">
 		<link href="../../css/index.css" rel="stylesheet" type="text/css">
+		<script src="/js/home.js"></script>
+		<script defer  src="/socket.io/socket.io.js"></script>
+        <script defer  src="/js/socketIO.js"></script>
 	</head>
 <body>
 	<%- include('../partials/header.ejs') %>
 	<main>
+		<% if (locals.user) { %>
+		<table cellspacing="0" cellpadding="0" id="chat1">
+			<tbody>
+				<!--
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ User1:</div> salutare1salutasaluddddddddddddddddddddddddddddddddddddddddd dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddt are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> </th>
+				</td>
+				<td class="message-time1">
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ User2:</div> salutare1salutasalut are1re1sutare1ssalutare1 salutasaaaaaalutaraae1reaaa1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> </th>
+				</td>
+				<td class="message-time1">
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ User3:</div> salutare1salutasalut re1</div> </th>
+				</td>
+				<td>
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ User4:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> </th>
+				</td>
+				<td>
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ User5:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> </th>
+				</td>
+				<td>
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ User6:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> </th>
+				</td>
+				<td>
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ User7:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> </th>
+				</td>
+				<td>
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ User8:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> </th>
+				</td>
+				<td>
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+			
+
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ User9:</div> salutare1sa luta alutare 1s alutare1</div> </th>
+				</td>
+				<td>
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+
+			<tr class="whole-message1">
+				<td class="user-and-message1">
+					<div class="user-from-chat1">♠️ Usedada:</div> utare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> </th>
+				</td>
+				<td>
+					<span class="message-time1">12:50</span>
+				</td>
+			</tr>
+			-->
+			
+			</tbody>
+			
+			<tfoot>
+				<tr class="input1">
+					<td colspan="2">
+						<form method="post">
+							<input type="text" placeholder="Introduceti mesajul aici" id="input-chat1">
+							<button type="submit" class="hidden" id="send_message"></button>
+						</form>
+					</td>
+				</tr>
+			</tfoot>
+			
+		</table>
+		<% } %>
+
+
+		<!---
+		<section id="chat">
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutare1salutasaluddddddddddddddddddddddddddddddddddddddddd
+				dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddt are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> 
+				<span class="message-time">12:50</span>
+			</div>
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> 
+				<span class="message-time">12:50</span>
+			</div>
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> 
+				<span class="message-time">12:50</span>
+			</div>
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> 
+				<span class="message-time">12:50</span>
+			</div>
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> 
+				<span class="message-time">12:50</span>
+			</div>
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> 
+				<span class="message-time">12:50</span>
+			</div>
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutare1salutasalut are1ral utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> 
+				<span class="message-time">12:50</span>
+			</div>
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutasalutare1sa lus alutare1</div> 
+				<span class="message-time">12:50</span>
+			</div>
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> 
+				<div class="message-time">12:50</div>
+			</div>
+			<div class="whole-message">
+				<div class="user-and-message"><div class="user-from-chat">♠️ User1:</div> salutare1salutasalut are1re1salutare1ssalutare1 salutasalutare1re1 ssal utare1salutasalutare1re1salutare1 salutare1sa lutare1salutare1salutare1sa lutare1ssssss alutare 1s alutare1</div> 
+				<div class="message-time">12:50</div>
+			</div>
+
+			<div class="input">
+				<form>
+					<input type="text" placeholder="Introduceti textul aici" id="input-chat">
+				</form>
+			</div>
+		</section>
+		-->
+
 		<section id="games">
 			<div>
 				<figure>
@@ -35,13 +203,13 @@
 			</div>
 			<div>
 				<figure>
-					<a href = "#">
+					<a href = "../games/poker">
 						<img src="../../img/poker.jpg" alt="poker" title="Joacă poker">
 					</a>
 						<figcaption>Poker</figcaption>
 				</figure>
 				<figure>
-					<a href = "#">
+					<a href = "../games/blackjack">
 						<img src="../../img/blackjack.jpg" alt="blackjack" title="Joacă blackjack">
 					</a>
 						<figcaption>Blackjack</figcaption>
