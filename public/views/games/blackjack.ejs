@@ -1,17 +1,93 @@
 <!DOCTYPE html>
 <html>
     <head>
-		
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Cazino Roial Poker Page">
+		<meta name="keywords" content="casino, cazino, roial, royale, poker, ruleta, slots, pacanele, blackjack">
+		<meta name="author" content="Hîrhui Călin, Smeu Ștefan, Tică Constantin, Tudorache Theodor, Zaharia Cătălin">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cazino Roial - Blackjack</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico"/>
+		<link href="../../css/layout.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="/css/blackjack.css">
+        <script defer  src="/socket.io/socket.io.js"></script>
+        <script defer  src="/js/socketIO.js"></script>
+        
+        <script src="/js/home.js"></script>
     </head>
     <body>
 
-        <main>
-			<button id="hit">hit</button>
-			<button id="stand">stand</button>
-			<button id="roundStart">new round</button>
+        <%- include('../partials/header') %>
+        <main id="poker_table">
+			
+                
+                
+                
+                <div class="table-wrapper lobby">
+                    <div class="table lobby">
+                        <div class="inner-circle lobby">
+                            Dealer must draw to 16 and stand on 17
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                <div id="cards_dealer">
+                </div>
+                <div id="dealer_value" class="value hidden">
+                </div>
+                
+                <div id="cards_player" >
+                </div>
+                <div id="player_value" class="value hidden">
+                </div>
+
+                <div id="who_wins" class="hidden"></div>
+
+    
+                
+    
+                <div class="sit3 lobby">
+                    <div class="images lobby">
+                        <img src="/img/avatars/no_avatar.png" class="profile lobby">
+                    </div>
+                    <div class="banner lobby">
+                        <div class="username" id="username3">
+                            <%= user.username %>
+                        </div>
+                        <div class="balance" id="balance3">
+                            <%= user.rp %> RP
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="pot-player3">
+                    0 RP
+                </div>
+    
+    
+                
+                
+                
+                <div class="play-buttons" id="play_buttons">
+                    <button id="hit" class="hidden">HIT</button>
+			        <button id="stand" class="hidden">STAND</button>
+                    <button id="double" class="hidden">DOUBLE</button>
+                    <button id="split" class="hidden">SPLIT</button>
+                    <button id="play-again" class="hidden">RUNDA NOUA</button>
+                    
+                    <div id="slider" class="slider-container">
+                        <input type="range"  min="2" value="2" step="2" class="slider" id="slider_input"></input>
+                    </div>
+                    <button id="bet_amount" class=""> 100 RP </button>
+                </div>
 		</main>
 		
-        <script src="../../js/blackjack.js"></script>
+        <%- include('../partials/footer') %>
+        <script defer  src="/js/blackjack.js"></script>
     </body>
     
 </html>

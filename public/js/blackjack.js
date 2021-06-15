@@ -64,13 +64,33 @@
         dealer = getHandValue(dealerCards);  
 
         if (player > 21 || (dealer > player && dealer <22))
-        return -1;
+            return -1;
         else if (player == dealer)
-        return 0;
+            return 0;
         else if (player == 21)
-        return 1.5;
+            return 1.5;
         else
-        return 1;
+            return 1;
+    }
+
+    function showCardsOnTable(playerCards, dealerCards) {
+        cards_dealer = document.getElementById("cards_dealer");
+        cards_dealer.innerHTML = "";
+        cards_player = document.getElementById("cards_player");
+        cards_player.innerHTML = "";
+        dealerCards.forEach(card => {
+            var img = document.createElement('img');
+            img.src = "/img/poker/cards/" + card.rank.toUpperCase() + card.suit.charAt(0).toUpperCase() + ".png";
+            img.classList.add("card");
+            cards_dealer.appendChild(img);
+        });
+
+        playerCards.forEach(card => {
+            var img = document.createElement('img');
+            img.src = "/img/poker/cards/" + card.rank.toUpperCase() + card.suit.charAt(0).toUpperCase() + ".png";
+            img.classList.add("card");
+            cards_player.appendChild(img);
+        });
     }
 
     
@@ -82,13 +102,41 @@
         }
         roundEndFlag=0;
         function endRound(){
-            payout = bet * winCondition(playerCards, dealerCards);
+            win_cond = winCondition(playerCards, dealerCards)
+            payout = bet * win_cond;
             console.log('payout=', payout);
             roialpointz+=payout;
+            setRP(roialpointz);
+            getRP();
+            socket.on('recieveRP', RP =>{
+                
+            })
+
             roundEndFlag=1;
+            who_wins = document.getElementById("who_wins")
+            who_wins.classList.remove("hidden");
+            if (win_cond == -1) {
+                who_wins.innerHTML = "Dealerul a castigat!";
+            } else if (win_cond == 0) {
+                who_wins.innerHTML = "Remiza!";
+            } else if (win_cond == 1.5) {
+                who_wins.innerHTML = "Blackjack! Ai castigat " + String(payout) + " RP!";
+            } else {
+                who_wins.innerHTML = "Ai castigat " + String(payout) + " RP!";
+            }
+            for (let button of document.getElementById("play_buttons").children){
+                button.classList.add("hidden");
+            }
+            document.getElementById("play-again").classList.remove("hidden");
         }
 
         function showValues(){
+            dealer_value = document.getElementById("dealer_value");
+            dealer_value.classList.remove("hidden");
+            player_value = document.getElementById("player_value");
+            player_value.classList.remove("hidden");
+            dealer_value.innerHTML=getHandValue(dealerCards)
+            player_value.innerHTML=getHandValue(playerCards)
             console.log("player= ", getHandValue(playerCards));
             console.log("dealer= ", getHandValue(dealerCards));
         }
@@ -100,14 +148,17 @@
         dealCard(dealerCards);
         dealCard(playerCards);
         showValues();
-        // console.log(playerCards);
-        // console.log(dealerCards);
+        showCardsOnTable(playerCards, dealerCards);
+         //console.log(playerCards);
+         //console.log(dealerCards);
+         
 
         
         document.getElementById("hit").onclick = function() {
             if (getHandValue(playerCards) < 21 && roundEndFlag==0){
                 dealCard(playerCards);
                 showValues();
+                showCardsOnTable(playerCards, dealerCards);
                 if (getHandValue(playerCards) > 21)
                     endRound();
             }
@@ -118,7 +169,8 @@
             if (roundEndFlag==0){
                 while (getHandValue(dealerCards) < 17){ //dealer turn
                     dealCard(dealerCards);
-                    showValues()
+                    showValues();
+                    showCardsOnTable(playerCards, dealerCards);
                 }
                 endRound();    
             }
@@ -133,10 +185,58 @@
 // deck.forEach(card => {
 //     console.log(card, getCardValue(card));
 // });
-roialpointz= 100;
+
+getRP();
+socket.on('recieveRP', RP =>{
+    roialpointz= RP;
+})
 // playRound()
+/*
 document.getElementById("roundStart").onclick=function(){
     playRound();
+};*/
+
+
+
+window.onload=function(){
+
+    document.getElementById("bet_amount").innerHTML=document.getElementById("slider_input").value.concat(" RP");
+    document.getElementById("slider_input").max=document.getElementById("balance3").innerHTML.replace(" RP", "").trim();
+    //console.log(document.getElementById("balance3").innerHTML.replace(" RP", "").trim())
+        
+    document.getElementById("slider_input").oninput = function() {
+        document.getElementById("bet_amount").innerHTML = this.value.concat(" RP");
+    }
+
+    document.getElementById("bet_amount").onclick = function() {
+        
+        bet_amount=parseInt(document.getElementById("slider_input").value);
+        if(bet_amount <= roialpointz) {
+            document.getElementById("pot-player3").innerHTML = String(bet_amount) + " RP";
+            document.getElementById("slider").classList.add("hidden");
+            document.getElementById("bet_amount").classList.add("hidden");
+            document.getElementById("hit").classList.remove("hidden");
+            document.getElementById("stand").classList.remove("hidden");
+            playRound(bet_amount);
+        }
+	}
+
+    document.getElementById("play-again").onclick = function() {
+        /*
+        document.getElementById("cards_dealer").innerHTML="";
+        document.getElementById("cards_player").innerHTML="";
+        document.getElementById("dealer_value").classList.add("hidden");
+        document.getElementById("player_value").classList.add("hidden");
+        document.getElementById("who_wins").classList.add("hidden");
+        document.getElementById("bet_amount").innerHTML=document.getElementById("slider_input").value.concat(" RP");
+        document.getElementById("slider_input").max=document.getElementById("balance3").innerHTML.replace(" RP", "").trim();
+        document.getElementById("pot-player3").innerHTML = "0 RP";
+        document.getElementById("play-again").classList.add("hidden");
+        document.getElementById("slider").classList.remove("hidden");
+		document.getElementById("bet_amount").classList.remove("hidden");*/
+        window.location.reload();
+    }
+
 };
 
 
