@@ -188,7 +188,7 @@
         
     }
 
-/*
+
 // deck = getRandomDeck()
 // console.log(deck);
 // deck.forEach(card => {
@@ -202,6 +202,6 @@ document.getElementById("newRound").onclick=function(){
     playRound();
     document.getElementById("doubleDown").style.display="initial";
 };
-*/
+
 
 module.exports= {getHandValue, winCondition}
