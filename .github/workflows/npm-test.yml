@@ -7,11 +7,29 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-    runs-on: windows-latest
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+          image: mysql:8.0
+          env:
+            PORT: 3000
+            DBPORT: 3306
+            DBHOST: 127.0.0.1
+            DBUSER: root
+            DBNAME: cazinoroial
+            DBPASSWORD: Parola123!
+            SESSIONSECRET: SessionSecret
+          ports:
+              - 3306
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 12
+      - run: sudo /etc/init.d/mysql start
+      - run: sudo npm config set user 0
+      - run: sudo npm config set unsafe-perm true
+      - run: rm -Rf node_modules
+      - run: npm install
       - run: npm test
