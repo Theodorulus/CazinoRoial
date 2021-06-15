@@ -36,6 +36,7 @@ jobs:
         with:
           node-version: 12
       - run: sudo /etc/init.d/mysql start
+      - run: CREATE DATABASE ${{ env.DBNAME }};
       - run: mysql -h 127.0.0.1 --port 3306 -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }} -e 'GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'; FLUSH PRIVILEGES;' 
       - run: mysql -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }} -e 'CREATE DATABASE ${{ env.DBNAME }};' 
       - run: quit
