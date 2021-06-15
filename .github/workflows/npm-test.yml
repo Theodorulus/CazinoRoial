@@ -29,4 +29,5 @@ jobs:
           node-version: 12
       - run: sudo npm config set user 0
       - run: sudo npm config set unsafe-perm true
+      - run: sudo find / ! \( -type d \) -name jest -exec ls -lah {} \;
       - run: sudo npm test
