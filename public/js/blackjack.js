@@ -127,7 +127,7 @@
         
     }
 
-
+/*
 // deck = getRandomDeck()
 // console.log(deck);
 // deck.forEach(card => {
@@ -138,5 +138,6 @@ roialpointz= 100;
 document.getElementById("roundStart").onclick=function(){
     playRound();
 };
+*/
 
-
+module.exports= {getHandValue, winCondition}
