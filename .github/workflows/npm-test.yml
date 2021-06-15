@@ -38,7 +38,7 @@ jobs:
       - run: |
           mysql --version
           sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -u-u${{ env.DBUSER }} -p${{ env.DBPASSWORD }} -e "SHOW DATABASES"
+          mysql --host 127.0.0.1 --port 3306 -u-u${{ env.DBUSER }} -p${{ env.DBPASSWORD }} -e "SHOW DATABASES"
       - run: sudo /etc/init.d/mysql start
       - run: mysql -h 127.0.0.1 --port 3306 -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }} -e 'GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'; FLUSH PRIVILEGES;' 
       - run: mysql -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }} -e 'CREATE DATABASE ${{ env.DBNAME }};' 
