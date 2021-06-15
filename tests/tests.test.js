@@ -9,8 +9,7 @@ const db = require('../src/config/dbConnection').db;
 describe("Unit tests", () => {
 
   beforeAll(() => {
-    console.log(app)
-    try{db.query('DELETE FROM users WHERE Email = ? ',"as@asf.com", () => {});
+    try{db.query('DELETE FROM users WHERE Email = ? ',"test@test.com", () => {});
     }
     catch(e){next(e)}
   });
@@ -23,8 +22,8 @@ describe("Unit tests", () => {
   test("Create user", async () => {
     
       req = {
-        username: "stefansmeu",
-        email: "as@asf.com",
+        username: "test",
+        email: "test@test.com",
         password: "parola123",
         confirm_pass: "parola123",
         phone: 123123123,
@@ -37,7 +36,7 @@ describe("Unit tests", () => {
   test("Login user", async () => {
     
     req = {
-      email: "as@asf.com",
+      email: "test@test.com",
       password: "parola123",
     }
     const response =  await (request(app).post("/accounts/login")).send(req)
