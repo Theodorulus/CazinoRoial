@@ -36,7 +36,7 @@ jobs:
         with:
           node-version: 12
       - run: sudo /etc/init.d/mysql start
-      - run: mysql -e 'GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'; FLUSH PRIVILEGES;'
+      - run: mysql -e 'GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'; FLUSH PRIVILEGES;' -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }}
       - run: mysql -e 'CREATE DATABASE ${{ env.DBNAME }};' -u${{ env.DBUSER }} -p${{ env.DBPASSWORD }}
       - run: quit
       - run: sudo npm config set user 0
