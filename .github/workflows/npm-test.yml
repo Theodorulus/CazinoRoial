@@ -40,7 +40,7 @@ jobs:
           mysql version: '8.0' 
           mysql database: ${{ env.DBNAME}} 
           mysql root password: ${{ env.DBPASSWORD }} 
-          mysql user: ${{ env.DBUSER } 
+          mysql user: ${{ env.DBUSER }}
           mysql password: ${{ env.DBPASSWORD }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
