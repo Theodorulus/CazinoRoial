@@ -37,14 +37,10 @@ jobs:
           node-version: 12
       - run: sudo /etc/init.d/mysql start
       - run: sudo /usr/sbin/mysqld --skip-grant-tables --skip-networking &
-      - run: mysql -u root
-      - run: FLUSH PRIVILEGES;
-      - run: ALTER USER 'root'@'localhost' IDENTIFIED BY 'Parola123!';
-      - run: quit
       - run: |
           mysql --version
           sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port 3306 -u${{ env.DBUSER }} -e "SHOW DATABASES"
+          mysqladmin --host 127.0.0.1 --port 3306 -u${{ env.DBUSER }} -e "SHOW DATABASES"
       - run: mysql -h 127.0.0.1 --port 3306 -u${{ env.DBUSER }} -e 'GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'; FLUSH PRIVILEGES;' 
       - run: mysql -u${{ env.DBUSER }} -e 'CREATE DATABASE ${{ env.DBNAME }};' 
       - run: quit
