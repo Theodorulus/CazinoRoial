@@ -26,7 +26,7 @@ function sendPokerMessage(message){
 }
 
 socket.on('receivePokerMessage', data => {
-    console.log(data)
+    //console.log(data)
     // data = {
     //     sender: *name*,
     //     date: date,
@@ -40,7 +40,7 @@ function sendGlobalMessage(message) {
 }
 
 socket.on('receiveGlobalMessage', data => {
-    console.log(data)
+    //console.log(data)
     // do smth with data
 })
 

@@ -550,14 +550,35 @@ main {
 	left: 0%;
 	top: 60vw;
 	border: 1px solid white;
-	min-width: 40%;
-	max-width: 40%;
+	min-width: 60%;
+	max-width: 60%;
 	text-align: left;
 	margin-left: 50%;
 	margin-top: 2%;
 	transform: translateX(-50%);
 	border-radius: 10px;
 	overflow: hidden;
+}
+
+#chat1 tbody {
+	display: inline-block;
+	overflow-y: scroll;
+	height: 15vw;
+	width: 100%;
+}
+
+#chat1 tbody, tr, td {
+	display: inline-block;
+}
+
+
+#chat1 tr {
+	width: 100%;
+}
+
+
+#chat1 tbody::-webkit-scrollbar {
+	width: 0%;
 }
 
 #chat1 .user-from-chat1 {
@@ -574,6 +595,7 @@ main {
 	padding: 0.5% 0% 0.5% 0;
 	overflow: hidden;
 	padding-left: 0.7%;
+	width: 95%;
 }
 
 .whole-message1:nth-of-type(odd) {
@@ -585,9 +607,10 @@ main {
 }
 
 
+
+
 #chat1 .message-time1 {
 	padding-right: 5px;
-	
 	font-size: 12px;
 }
 

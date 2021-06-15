@@ -545,6 +545,9 @@ function getUserData(socket, callback) {
 		if (error) {
 			console.error(error);
 		}
+		
+		if(!result[0]) return;
+		
 
 		var userId = JSON.parse(result[0].data).userLoggedIn;
 

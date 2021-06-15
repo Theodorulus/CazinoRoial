@@ -1,6 +1,10 @@
+function sendPokerMessage(message){
+    socket.emit('sendPokerMessage', message)
+}
 
 window.onload=function()
 {
+	/*
 	document.getElementById("show_rooms").onclick = function() {
 		document.getElementById("rooms").classList.remove("hidden")
 	};
@@ -20,13 +24,78 @@ window.onload=function()
 		//console.log("Salut robi");
 		document.getElementById("slider").classList.remove("hidden");
 		document.getElementById("bet_amount").classList.remove("hidden");
-	}
+	}*/
+
+
+
+    socket.on('receivePokerMessage', data => {
+      var chat = document.getElementById("chat1");
+      var tbody = chat.children[0];
+      var tr = document.createElement('tr');
+      tr.classList.add("whole-message1");
+      var td1 = document.createElement('td');
+      td1.classList.add("user-and-message1");
+      var div = document.createElement('div');
+      div.classList.add("user-from-chat1");
+      div.innerHTML="♠️ " + data.sender + ":";
+      td1.appendChild(div);
+      td1.innerHTML = td1.innerHTML + " " + data.message;
+      var td2 = document.createElement('td');
+      var span = document.createElement('span');
+      span.classList.add("message-time1");
+      var message_time = new Date(data.date).toLocaleString('en-GB')
+      //console.log(message_time.slice(12, 17))
+      span.innerHTML = message_time.slice(12, 17);
+      td2.appendChild(span);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tbody.appendChild(tr);
+    })
 	
 	document.getElementById("send_message").onclick = function (e) {
 		e.preventDefault();
-	}
+    //console.log(document.getElementById("input-chat1").value)
+    if (document.getElementById("input-chat1").value != "") {
+
+      var chat = document.getElementById("chat1");
+      var tbody = chat.children[0];
+      var tr = document.createElement('tr');
+      tr.classList.add("whole-message1");
+      var td1 = document.createElement('td');
+      td1.classList.add("user-and-message1");
+      var div = document.createElement('div');
+      div.classList.add("user-from-chat1");
+      div.innerHTML="♠️ " + "You" + ":";
+      td1.appendChild(div);
+      td1.innerHTML = td1.innerHTML + " " + document.getElementById("input-chat1").value;
+      //console.log(td1.innerHTML);
+      var td2 = document.createElement('td');
+      var span = document.createElement('span');
+      span.classList.add("message-time1");
+      var ora = new Date().toString();
+      //console.log(ora.slice(16, 21))
+      span.innerHTML = ora.slice(16, 21);
+      td2.appendChild(span);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tbody.appendChild(tr);
+      sendPokerMessage(document.getElementById("input-chat1").value)
+      console.log(document.getElementById("input-chat1").value)
+      document.getElementById("input-chat1").value = "";
+      
+    }
+  }
+
+
+
+
+
+
+
+
+
+
 	
-window.onload = function() {
     var currentMaxBet = 0;
     var myBet = 0;
     var round = "betting";
@@ -433,4 +502,20 @@ window.onload = function() {
         
     });
 
+
+
+
+
+	function sendPokerMessage(message){
+		socket.emit('sendPokerMessage', message)
+	}
+	
+	socket.on('receivePokerMessage', data => {
+		console.log(data)
+		// data = {
+		//     sender: *name*,
+		//     date: date,
+		//     message: *mesaj*
+		// }
+	})
 }

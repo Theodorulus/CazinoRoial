@@ -1,12 +1,38 @@
 #chat1 {
 	border: 1px solid white;
-	width: 70%;
+	width: 50vw;
 	text-align: left;
 	margin-left: 50%;
 	margin-top: 2%;
 	transform: translateX(-50%);
 	border-radius: 10px;
 	overflow: hidden;
+	height: 15vw;
+	/*overflow-y: scroll;*/
+	
+	
+}
+
+#chat1 tbody {
+	display: inline-block;
+	overflow: hidden;
+	overflow-y: scroll;
+	height: 15vw;
+	width: 100%;
+}
+
+#chat1 tbody, tr, td {
+	display: inline-block;
+}
+
+
+#chat1 tr {
+	width: 100%;
+}
+
+
+#chat1 tbody::-webkit-scrollbar {
+	width: 0%;
 }
 
 #chat1 .user-from-chat1 {
@@ -23,6 +49,7 @@
 	padding: 0.5% 0% 0.5% 0;
 	overflow: hidden;
 	padding-left: 0.7%;
+	width: 95%;
 }
 
 .whole-message1:nth-of-type(odd) {
@@ -230,6 +257,10 @@ td {
 
 .image-container img:hover + .playbtn, .playbtn:hover{
   display:inline-block;
+}
+
+.hidden {
+	display: none;
 }
 
 
