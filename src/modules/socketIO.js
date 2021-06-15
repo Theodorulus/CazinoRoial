@@ -221,7 +221,7 @@ class PokerRoom {
 
 	startGame() {
 		if (this.players.length < 2) {
-			io.to(connectedUsers.get(this.adminId).emit('notEnoughPlayers'))
+			this.io.to(connectedUsers.get(this.adminId).emit('notEnoughPlayers'))
 			return;
 		}
 		this.getDeck()
@@ -466,7 +466,7 @@ class PokerRoom {
 		var newPlayersList = []
 
 		for (let player of this.players){
-			if (activePokerPlayers.get(p.userId) !== this) continue
+			if (activePokerPlayers.get(player.userId) !== this) continue
 
 			if (player.rp < 1) {
 				activePokerPlayers.delete(player.userId)
@@ -740,6 +740,19 @@ io.on('connection', socket => {
 		})
 	})
 //  END POKER ---------------------------------------------------------------------------------------------------------
+	socket.on('getItems', () => {
+
+		getUserData(socket, (user) => {
+			db.query('select category, name from inuse where UserId = ?', [user.id], (err, res) => {
+				if (err) {
+					console.log(err)
+				}
+
+				io.to(socket.id).emit('receiveItems', res[0])
+			})
+		})
+	})
+
 
     socket.on('disconnect', function() {
         console.log('Got disconnected: ', socket.id);
