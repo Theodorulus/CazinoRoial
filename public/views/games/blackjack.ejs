@@ -75,8 +75,7 @@
                 <div class="play-buttons" id="play_buttons">
                     <button id="hit" class="hidden">HIT</button>
 			        <button id="stand" class="hidden">STAND</button>
-                    <button id="double" class="hidden">DOUBLE</button>
-                    <button id="split" class="hidden">SPLIT</button>
+                    <button id="doubleDown" class="hidden">DOUBLE</button>
                     <button id="play-again" class="hidden">RUNDA NOUA</button>
                     
                     <div id="slider" class="slider-container">
@@ -84,14 +83,15 @@
                     </div>
                     <button id="bet_amount" class=""> 100 RP </button>
                 </div>
-        <main>
-			<button id="newRound">new round</button>
-			<button id="hit">hit</button>
-			<button id="stand">stand</button>
-			<button id="doubleDown">double down</button>
-            <button id="split">split</button>
-		</main>
-		
+        
+                    <div class="hidden">
+                        <button id="newRound">new round</button>
+                        <button id="hit">hit</button>
+                        <button id="stand">stand</button>
+                        <!--<button id="doubleDown">double down</button>-->
+                        <button id="split">split</button>
+                    </div>
+                </main>
         <%- include('../partials/footer') %>
         <script defer  src="/js/blackjack.js"></script>
     </body>
