@@ -29,10 +29,9 @@ jobs:
           node-version: 12
       - run: sudo npm config set user 0
       - run: sudo npm config set unsafe-perm true
-      - run: sudo find / ! \( -type d \) -name jest -exec ls -lah {} \;
-      - run: chmod 755 /home/runner/work/CazinoRoial/CazinoRoial/node_modules/jest/node_modules/.bin/jest
-      - run: sudo npm test
+      - run: sudo npm rebuild
       - run: sudo npm watch
+      - run: sudo npm test
       - run: sudo node app.js
       - run: node app.js
       - run: npm test
