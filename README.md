@@ -4,14 +4,19 @@ Web app for the MDS project.
 ## Team Members
 
 [Hîrhui Călin](https://github.com/cul1n)
+
 [Smeu Ștefan](https://github.com/MrNiceGuy090)
+
 [Tică Constantin](https://github.com/costi-tica)
+
 [Tudorache Theodor](https://github.com/Theodorulus)
+
 [Zaharia Cătălin](https://github.com/Catalin-Zaharia)
 
 ## App Description
 
 Online Casino made for those who are eager to lose virtual money.
+
 Every new player can create an account and is given 100 Roial Pointz (our virtual currency) which they can multiply(or lose) by playing Roulette, Slots, Poker and Blackjack. They can also buy cosmetics (avatars, hats, mystery box) which they can show off with at the Poker table. Players can also chat through the global chat or poker chat.
 
 ## App Demo
@@ -46,6 +51,7 @@ https://github.com/Theodorulus/CazinoRoial/projects/1
 ## Source Control
 
 [Used multiple branches on Github](https://github.com/Theodorulus/CazinoRoial/branches)
+
 [Timeline of the commits](https://github.com/Theodorulus/CazinoRoial/network)
 
 ## Automation Testing (Unit tests)
@@ -53,6 +59,7 @@ https://github.com/Theodorulus/CazinoRoial/projects/1
 The unit tests are divided in 2 parts, one for backend, and one for frontend functions.
   - for backend there are tests for: login, register, get and post requests
   - for frontend there are tests for the blackjack functions: getHandValue(), winCondition(), shuffleArray() and getRandomDeck()
+
 The frontend ones are tested on each push and pull request with github actions: https://github.com/Theodorulus/CazinoRoial/actions
 
 ## Bug Reporting
@@ -72,6 +79,6 @@ Initially, the "Profile" table only had 'id', 'RoialPointz', 'Phone', 'Birthdate
 ## Design Patterns
 
 The app is using the MVC (Model-View-Controller) Design Pattern:
-  - Model - User, Profil, Items, etc.
+  - Model - User, Profile, Items, etc.
   - [View](https://github.com/Theodorulus/CazinoRoial/tree/main/public/views)
   - [Controller](https://github.com/Theodorulus/CazinoRoial/tree/main/src/controllers)
