@@ -1,19 +1,26 @@
 # CazinoRoial
-Aplicatie Web pentru proiect MDS.
+Web app for the MDS project.
 
-## Team members
+## Team Members
 
-TBC
+[Hîrhui Călin](https://github.com/cul1n)
+[Smeu Ștefan](https://github.com/MrNiceGuy090)
+[Tică Constantin](https://github.com/costi-tica)
+[Tudorache Theodor](https://github.com/Theodorulus)
+[Zaharia Cătălin](https://github.com/Catalin-Zaharia)
 
-Backlog: https://github.com/Theodorulus/CazinoRoial/projects/1
-
-## App description
+## App Description
 
 Online Casino made for those who are eager to lose virtual money.
+Every new player can create an account and is given 100 Roial Pointz (our virtual currency) which they can multiply(or lose) by playing Roulette, Slots, Poker and Blackjack. They can also buy cosmetics (avatars, hats, mystery box) which they can show off with at the Poker table. Players can also chat through the global chat or poker chat.
 
-## App demo
+## App Demo
 
 TBC
+
+## Backlog: 
+
+https://github.com/Theodorulus/CazinoRoial/projects/1
 
 ## User Stories
 1. As a professional poker player, I want to have statistics on the hands played
@@ -32,33 +39,39 @@ TBC
 14. As a developer, I want good communication between team members.
 15. As a manager, I want to know the progress of the development team, so that I can answer any questions they may have.
 
-## UML
+## UML (State Diagram)
 
 <img src="./public/img/Cazino_Roial_UML.png">
 
+## Source Control
 
-## Bug reporting
+[Used multiple branches on Github](https://github.com/Theodorulus/CazinoRoial/branches)
+[Timeline of the commits](https://github.com/Theodorulus/CazinoRoial/network)
 
-1. When using socket.io, if the session suddenly expired, the socket API tries to maintain the connection by querying the database with an undefined session id, resulting in the server going down. Solution: Checking if the cookie object in the request header, includes the sessionId property. Info: (https://github.com/Theodorulus/CazinoRoial/issues/26)
-
-2. After some minor files modifications, some parts of the games controller stopped working properly. Solution: Changed the paths to the modified files. Info: (https://github.com/Theodorulus/CazinoRoial/issues/24)
-
-## Design Patterns
-
-TBC
-
-## Refactoring
-
-TBC
-
-## Build tool
-
-The app is using npm with custom scripts as a pseudo build tool.
-
-## Unit tests
+## Automation Testing (Unit tests)
 
 The unit tests are divided in 2 parts, one for backend, and one for frontend functions.
   - for backend there are tests for: login, register, get and post requests
   - for frontend there are tests for the blackjack functions: getHandValue(), winCondition(), shuffleArray() and getRandomDeck()
 The frontend ones are tested on each push and pull request with github actions: https://github.com/Theodorulus/CazinoRoial/actions
 
+## Bug Reporting
+
+1. When using socket.io, if the session suddenly expired, the socket API tries to maintain the connection by querying the database with an undefined session id, resulting in the server going down. Solution: Checking if the cookie object in the request header, includes the sessionId property. Info: (https://github.com/Theodorulus/CazinoRoial/issues/26)
+
+2. After some minor files modifications, some parts of the games controller stopped working properly. Solution: Changed the paths to the modified files. Info: (https://github.com/Theodorulus/CazinoRoial/issues/24)
+
+## Build Tool
+
+The app is using npm with custom scripts as a pseudo build tool.
+
+## Refactoring
+
+Initially, the "Profile" table only had 'id', 'RoialPointz', 'Phone', 'Birthdate' and 'UserId'. Later, we added 'PokersHandsWon' and 'PokerHandsPlayed' for the statistics shown on your profile page.
+
+## Design Patterns
+
+The app is using the MVC (Model-View-Controller) Design Pattern:
+  - Model - User, Profil, Items, etc.
+  - [View](https://github.com/Theodorulus/CazinoRoial/tree/main/public/views)
+  - [Controller](https://github.com/Theodorulus/CazinoRoial/tree/main/src/controllers)
