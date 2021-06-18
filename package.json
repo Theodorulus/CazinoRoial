@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "watch": "nodemon app.js",
+    "test-github": "jest tests/frontendTests.test.js --forceExit",
     "test": "jest --forceExit"
   },
   "author": "",

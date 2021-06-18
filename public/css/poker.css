@@ -89,9 +89,37 @@ main {
 
 .profile {
     margin-left: 2vw;
-    height: 7vw;
     width: 6vw;
 }
+
+.avatar {
+	position: relative;
+	display: inline-block;
+}
+
+.image1 {
+	position: relative;
+	width: 75%;
+	z-index: 0;
+	display: block;
+}
+
+.image1nohat {
+	position: relative;
+	width: 100%;
+	z-index: 0;
+	display: block;
+	
+}
+.image2 {
+	position: relative;
+	width: 75%;
+	margin-bottom: -1.5vw;
+	display: block;
+	z-index: 1;
+}
+
+
 
 .banner {
     background-color: rgb(49, 49, 49);
@@ -112,6 +140,7 @@ main {
     width: 4.6vw;
     transform: rotate(-15deg);
     z-index: -1;
+	display: inline-block;
 }
 
 .card2 {
@@ -122,6 +151,7 @@ main {
     width: 4.6vw;
     transform: rotate(10deg);
     z-index: -1;
+	display: inline-block;
 }
 
 #lobbyList {

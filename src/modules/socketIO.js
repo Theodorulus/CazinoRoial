@@ -9,12 +9,13 @@ class PokerPlayer {
 		in: 1,
 		out: 0
 	}
-	constructor(userId, userName, rp) {
+	constructor(userId, userName, rp, itemList) {
 		this.userId = userId
 		this.userName = userName
 		this.rp = rp
 		this.cards = undefined
 		this.inGameStatus = PokerPlayer.inGameStatus.out
+		this.items = itemList
 	}
 
 	loseRP(rp) {
@@ -121,7 +122,7 @@ class PokerRoom {
 	}
 
 	sendDataBackToPlayers(callback) {
-		var publicPlayersInfo = this.players.map(p => {let info = {userName: p.userName, inGame: p.inGameStatus, rp: p.rp}; return info})
+		var publicPlayersInfo = this.players.map(p => {let info = {userName: p.userName, inGame: p.inGameStatus, rp: p.rp, items: p.items}; return info})
 		for (let i = 0; i < this.players.length; ++i) {
 			let player = this.players[i]
 
@@ -556,7 +557,14 @@ function getUserData(socket, callback) {
 				console.log(error)
 			}
 
-			callback(resultUser[0])
+			db.query('select category, name from inuse where UserId = ?', [userId], (err, resItems) => {
+				if (err) {
+					console.log(err)
+				}
+				resultUser[0].items = resItems;
+
+				callback(resultUser[0])
+			})
 		})
 	})
 }
@@ -631,7 +639,7 @@ io.on('connection', socket => {
 
 			if (user.rp < 1) return;
 
-			admin = new PokerPlayer(user.id, user.Username, user.rp)
+			admin = new PokerPlayer(user.id, user.Username, user.rp, user.items)
 			pokerRoom = new PokerRoom(io, roomName, admin)
 
 			rooms.push(pokerRoom)
@@ -673,7 +681,7 @@ io.on('connection', socket => {
 				return
 			}
 
-			player = new PokerPlayer(user.id, user.Username, user.rp)
+			player = new PokerPlayer(user.id, user.Username, user.rp, user.items)
 			room.join(player)
 			activePokerPlayers.set(user.id, room)
 		})
@@ -762,6 +770,19 @@ io.on('connection', socket => {
 		})
 	})
 //  END POKER ---------------------------------------------------------------------------------------------------------
+	socket.on('getItems', () => {
+
+		getUserData(socket, (user) => {
+			db.query('select category, name from inuse where UserId = ?', [user.id], (err, res) => {
+				if (err) {
+					console.log(err)
+				}
+
+				io.to(socket.id).emit('receiveItems', res[0])
+			})
+		})
+	})
+
 
 	// Global chat
 	socket.on('sendGlobalMessage', message => {
