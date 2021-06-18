@@ -221,7 +221,7 @@ class PokerRoom {
 
 	startGame() {
 		if (this.players.length < 2) {
-			this.io.to(connectedUsers.get(this.adminId).emit('notEnoughPlayers'))
+			this.io.to(connectedUsers.get(this.adminId)).emit('notEnoughPlayers')
 			return;
 		}
 		this.getDeck()
@@ -697,7 +697,7 @@ io.on('connection', socket => {
 		getUserData(socket, user => {
 			const room = activePokerPlayers.get(user.id)
 
-			if (room.players[room.turn].userId == user.id){
+			if (room?.players[room.turn].userId == user.id){
 				console.log("Actiunea curenta: ", action)
 
 				if (!room.actions.includes(action.name)) return;
