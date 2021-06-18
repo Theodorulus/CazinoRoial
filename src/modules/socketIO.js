@@ -389,6 +389,7 @@ class PokerRoom {
 		var playersInGame = this.players.filter(p => p.inGameStatus == PokerPlayer.inGameStatus.in)
 		if (playersInGame.length == 1) {
 			this.gameOver()
+			console.log("S-a terminat!")
 			return
 		}
 
@@ -408,6 +409,7 @@ class PokerRoom {
 	gameOver() {
 		if (this.players.filter(p => p.inGameStatus == PokerPlayer.inGameStatus.in).length == 1) {
 			let i = 0
+			console.log("Si aici!")
 			while (i < this.players.length) {
 				let player = this.players[i]
 				if (player.inGameStatus == PokerPlayer.inGameStatus.in) {
@@ -415,9 +417,23 @@ class PokerRoom {
 
 					addPokerHandWon(player.userId)
 
-					this.io.to(connectedUsers.get(player.userId)).emit('winner', {gain: this.pot, rp: player.rp})
+					let data = {
+						gain: this.pot, 
+						rp: player.rp, 
+						winners: [player.userName], 
+						commonCards: this.commonCards,
+						players: this.players.map(p => {let info = {userName: p.userName, inGame: p.inGameStatus, cards: p.cards}; return info})
+					}
+
+					this.io.to(connectedUsers.get(player.userId)).emit('winner', data)
 				} else if (connectedUsers.get(player.userId)){
-					this.io.to(connectedUsers.get(player.userId)).emit('loser', {rp: player.rp})
+					let data = {
+						rp: player.rp, 
+						winners: [this.players.find(p => p.inGameStatus == PokerPlayer.inGameStatus.in).userName], 
+						commonCards: this.commonCards,
+						players: this.players.map(p => {let info = {userName: p.userName, inGame: p.inGameStatus, cards: p.cards}; return info})
+					}
+					this.io.to(connectedUsers.get(player.userId)).emit('loser', data)
 				}
 				++i;
 			}	
