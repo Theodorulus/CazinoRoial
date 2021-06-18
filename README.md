@@ -21,7 +21,7 @@ Every new player can create an account and is given 100 Roial Pointz (our virtua
 
 ## App Demo
 
-TBC
+https://youtu.be/BHfsbgQdkdQ
 
 ## Backlog: 
 
@@ -74,7 +74,7 @@ The app is using npm with custom scripts as a pseudo build tool.
 
 ## Refactoring
 
-Initially, the "Profile" table only had 'id', 'RoialPointz', 'Phone', 'Birthdate' and 'UserId'. Later, we added 'PokersHandsWon' and 'PokerHandsPlayed' for the statistics shown on your profile page.
+Initially, the "Profile" table only had 'id', 'RoialPointz', 'Phone', 'Birthdate' and 'UserId' columns. Later, we added 'PokersHandsWon' and 'PokerHandsPlayed' for the statistics shown on your profile page.
 
 ## Design Patterns
 
