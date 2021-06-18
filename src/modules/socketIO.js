@@ -437,6 +437,7 @@ class PokerRoom {
 				}
 				++i;
 			}	
+			this.resetGame()
 			return		
 		}
 
@@ -480,6 +481,10 @@ class PokerRoom {
 			}
 		}
 
+		this.resetGame()
+	}
+
+	resetGame(){
 		var newPlayersList = []
 
 		for (let player of this.players){
