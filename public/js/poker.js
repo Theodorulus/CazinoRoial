@@ -104,10 +104,10 @@ window.onload=function()
 
     document.getElementById("create").onclick = function () {
         let roomName = document.getElementById("roomName").value;
-        socket.emit('newPokerRoom', roomName);
-        console.log("Done!");
         if( roomName.length > 0) {
-        /* Show Lobby / Hide List */
+            /* Show Lobby / Hide List */
+            socket.emit('newPokerRoom', roomName);
+            console.log("Done!");
             let listItems = document.getElementById('lobbyList');
             let lobbyItems = document.getElementById('poker_table');
             
@@ -243,7 +243,7 @@ window.onload=function()
         document.getElementById('pot').innerHTML = data.pot + " RP";
 
         // hide cards and reset banners
-        if (lastRound == "river" && data.round == "preflop") {
+        if ((lastRound == "river" || lastRound == "turn" || lastRound == "flop") && data.round == "preflop") {
             for(let i = 1; i <= 5; i++) {
                 document.getElementById("username" + i).parentElement.style.backgroundColor = 'rgb(49, 49, 49)';
                 let firstCardId = 2* i - 1;
@@ -255,16 +255,19 @@ window.onload=function()
 
         // update la bet
         if (lastRound == data.round) {
-            let index = data.turn + 1;
-            while (index < 5 && playersBets[index] == null) {
-                index++;
+            let index = data.turn - 1;
+
+            while (index >= 0 && (playersBets[index] == null || data.players[index].inGame == 0)) {
+                index--;
             }
-            if (index == 5) {
-                index = 0;
-                while (playersBets[index] == null && index <= data.turn) {
-                    index++;
+
+            if (index == -1) {
+                index = 4;
+                while ((playersBets[index] == null || data.players[index].inGame == 0) && index > 0) {
+                    index--;
                 }
             }
+
             playersBets[index] += (data.pot - lastPot);
             document.getElementById('pot-player' + (index+1)).innerHTML =
             playersBets[index] + " RP";
@@ -334,7 +337,7 @@ window.onload=function()
 
 
         // hide cards and reset banners
-        if (lastRound == "river" && data.round == "preflop") {
+        if ((lastRound == "river" || lastRound == "turn" || lastRound == "flop") && data.round == "preflop") {
             for(let i = 1; i <= 5; i++) {
                 document.getElementById("username" + i).parentElement.style.backgroundColor = 'rgb(49, 49, 49)';
                 let firstCardId = 2* i - 1;
@@ -346,16 +349,18 @@ window.onload=function()
 
         // update la bet
         if (lastRound == data.round) {
-            let index = myId;
-            while (index < 5 && playersBets[index] == null) {
-                index++
+            let index = myId - 2;
+            while (index >= 0 && (playersBets[index] == null || data.players[index].inGame == 0)) {
+                index--;
             }
-            if (index == 5) {
-                index = 0;
-                while (playersBets[index] == null && index < myId) {
-                    index++;
+
+            if (index == -1) {
+                index = 4;
+                while ((playersBets[index] == null || data.players[index].inGame == 0) && index > 0) {
+                    index--;
                 }
             }
+
             playersBets[index] += (data.pot - lastPot);
             document.getElementById('pot-player' + (index+1)).innerHTML =
             playersBets[index] + " RP";
@@ -371,6 +376,7 @@ window.onload=function()
                 }
             }
         }
+
 
         lastPot = data.pot;
         lastRound = data.round;
@@ -684,9 +690,9 @@ window.onload=function()
 
 
 
-    document.getElementById("raise_amount").innerHTML=document.getElementById("slider_input_raise").value.concat(" RP");
-
     document.getElementById("slider_input_raise").value= currentMaxBet - myBet + 1;
+
+    document.getElementById("raise_amount").innerHTML=document.getElementById("slider_input_raise").value.concat(" RP");
 
 
     document.getElementById("slider_input_raise").oninput = function() {

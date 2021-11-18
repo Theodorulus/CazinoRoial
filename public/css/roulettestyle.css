@@ -598,3 +598,5 @@ body {
 .container {
   width: 100%;
 }
+
+html,body,nav{margin: auto !important;};
